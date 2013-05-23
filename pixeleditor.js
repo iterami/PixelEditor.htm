@@ -33,9 +33,9 @@ function set_pixeldiv_color(i){
     }while(j--);
 
     /*set pixel div background*/
-    get(i).style.background = 'rgb(' + parseInt(get('red').value) + ',' +
-        parseInt(get('green').value) + ',' +
-        parseInt(get('blue').value) + ')'
+    get(i).style.background = 'rgb(' + parseInt(get('red').value) + ','
+        + parseInt(get('green').value) + ','
+        + parseInt(get('blue').value) + ')'
 }
 
 function switch_view(){

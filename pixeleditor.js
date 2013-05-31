@@ -15,22 +15,24 @@ function reset(){
             get(i).style.backgroundColor = '#000'
         }while(i--);
 
-        view = 1;/*edit mode*/
+        /*set view to edit mode*/
+        view = 1;
         switch_view()
     }
 }
 
 function set_pixeldiv_color(i){
     warn_onbeforeunload = 1;
-
     /*verify color values*/
-    j = 2;
-    do{
-        q = ['red','green','blue'][j];
-        if(isNaN(get(q).value) || get(q).value < 0 || get(q).value > 255){
-            get(q).value = 255
-        }
-    }while(j--);
+    if(isNaN(get('red').value) || get('red').value < 0 || get('red').value > 255){
+        get('red').value = 255
+    }
+    if(isNaN(get('green').value) || get('green').value < 0 || get('green').value > 255){
+        get('green').value = 255
+    }
+    if(isNaN(get('blue').value) || get('blue').value < 0 || get('blue').value > 255){
+        get('blue').value = 255
+    }
 
     /*set pixel div background*/
     get(i).style.background = 'rgb(' + parseInt(get('red').value) + ','
@@ -43,9 +45,11 @@ function switch_view(){
 
     if(view){/*preview mode*/
         /*paint canvas pixels based on colors of divs*/
-        j = get('canvas').height = get('canvas').width = 25;
-        x = get('canvas').getContext('2d');
+        get('canvas').height = 25;
+        get('canvas').width = 25;
+        j = 25;
         i = 624;
+        x = get('canvas').getContext('2d');
         do{
             x.fillStyle = get(i).style.background;
             x.fillRect(
@@ -68,7 +72,6 @@ function switch_view(){
 
 var i = 624;
 var j = '';
-var q = 0;
 var view = 0;
 var warn_onbeforeunload = 0;
 var x = 0;

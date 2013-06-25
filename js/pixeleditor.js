@@ -35,9 +35,9 @@ function set_pixeldiv_color(i){
     }
 
     /* set pixel div background */
-    get(i).style.background = 'rgb(' + parseInt(get('red').value) + ','
-        + parseInt(get('green').value) + ','
-        + parseInt(get('blue').value) + ')';
+    get(i).style.background = 'rgb(' + parseInt(get('red').value) + ', '
+                                     + parseInt(get('green').value) + ', '
+                                     + parseInt(get('blue').value) + ')';
 }
 
 function switch_view(){
@@ -89,6 +89,6 @@ j = 0;
 
 window.onbeforeunload = function(){
     if(warn_onbeforeunload){/* if any pixels have been changed */
-        return'Save feature not yet implemented.';
+        return 'Save feature not yet implemented.';
     }
 }

@@ -15,7 +15,7 @@ function reset(){
             get(i).style.backgroundColor = '#000';
         }while(i--);
 
-        /* set view to edit mode */
+        // set view to edit mode
         view = 1;
         switch_view();
     }
@@ -23,7 +23,7 @@ function reset(){
 
 function set_pixeldiv_color(i){
     warn_onbeforeunload = 1;
-    /* verify color values */
+    // verify color values
     if(isNaN(get('red').value) || get('red').value < 0 || get('red').value > 255){
         get('red').value = 255;
     }
@@ -34,7 +34,7 @@ function set_pixeldiv_color(i){
         get('blue').value = 255;
     }
 
-    /* set pixel div background */
+    // set pixel div background
     get(i).style.background = 'rgb(' + parseInt(get('red').value) + ', '
                                      + parseInt(get('green').value) + ', '
                                      + parseInt(get('blue').value) + ')';
@@ -43,8 +43,8 @@ function set_pixeldiv_color(i){
 function switch_view(){
     view = !view;
 
-    if(view){/* preview mode */
-        /* paint canvas pixels based on colors of divs */
+    if(view){// preview mode
+        // paint canvas pixels based on colors of divs
         get('canvas').height = 25;
         get('canvas').width = 25;
         j = 25;
@@ -76,7 +76,7 @@ var view = 0;
 var warn_onbeforeunload = 0;
 var x = 0;
 
-/* create pixel divs */
+// create pixel divs
 do{
     j += '<div class=pixel id=' + i + ' onclick=set_pixeldiv_color(' + i + ')></div>';
     if(i % 25 === 0){
@@ -88,7 +88,7 @@ get('edit-div').innerHTML = j;
 j = 0;
 
 window.onbeforeunload = function(){
-    if(warn_onbeforeunload){/* if any pixels have been changed */
+    if(warn_onbeforeunload){// if any pixels have been changed
         return 'Save feature not yet implemented.';
     }
 }

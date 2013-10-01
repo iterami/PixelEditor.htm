@@ -2,6 +2,22 @@ function get(i){
     return document.getElementById(i);
 }
 
+function grid_toggle(){
+    i = 624;
+
+    // enable grid if buttons don't have borders, else disable grid
+    if(get(0).style.borderWidth != '1px'){
+        do{
+            get(i).style.borderWidth = '1px';
+        }while(i--);
+
+    }else{
+        do{
+            get(i).style.borderWidth = 0;
+        }while(i--);
+    }
+}
+
 function make_png(){
     window.open(get('canvas').toDataURL('image/png'));
 }
@@ -78,13 +94,17 @@ var x = 0;
 
 // create pixel divs
 do{
-    j += '<div class=pixel id=' + i + ' onclick=set_pixeldiv_color(' + i + ')></div>';
+    j += '<div class=pixel id=' + i + ' onclick=set_pixeldiv_color(' + i + ') ondragstart="return false"></div>';
     if(i % 25 === 0){
         j += '<br>';
     }
 }while(i--);
 
 get('edit-div').innerHTML = j;
+
+// set borderWidth of first button to use as grid toggle
+get(0).style.borderWidth = '1px';
+
 j = 0;
 
 window.onbeforeunload = function(){

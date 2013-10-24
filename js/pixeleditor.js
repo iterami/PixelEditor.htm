@@ -37,25 +37,6 @@ function reset(){
     }
 }
 
-function set_pixeldiv_color(i){
-    warn_onbeforeunload = 1;
-    // verify color values
-    if(isNaN(get('red').value) || get('red').value < 0 || get('red').value > 255){
-        get('red').value = 255;
-    }
-    if(isNaN(get('green').value) || get('green').value < 0 || get('green').value > 255){
-        get('green').value = 255;
-    }
-    if(isNaN(get('blue').value) || get('blue').value < 0 || get('blue').value > 255){
-        get('blue').value = 255;
-    }
-
-    // set pixel div background
-    get(i).style.background = 'rgb(' + parseInt(get('red').value) + ', '
-                                     + parseInt(get('green').value) + ', '
-                                     + parseInt(get('blue').value) + ')';
-}
-
 function switch_view(){
     view = !view;
 
@@ -94,7 +75,7 @@ var x = 0;
 
 // create pixel divs
 do{
-    j += '<div class=pixel id=' + i + ' onclick=set_pixeldiv_color(' + i + ') ondragstart="return false"></div>';
+    j += '<div class=pixel id=' + i + ' onclick=this.style.background=get(\'color\').value ondragstart="return false"></div>';
     if(i % 25 === 0){
         j += '<br>';
     }

@@ -75,7 +75,7 @@ var x = 0;
 
 // create pixel divs
 do{
-    j += '<div class=pixel id=' + i + ' onclick=this.style.background=get(\'color\').value ondragstart="return false"></div>';
+    j += '<div class=pixel id=' + i + ' onclick=warn_onbeforeunload=1;this.style.background=get(\'color\').value ondragstart="return false"></div>';
     if(i % 25 === 0){
         j += '<br>';
     }

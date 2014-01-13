@@ -1,3 +1,16 @@
+function fill(){
+    if(confirm('Set every pixel to selected color?')){
+        i = 624;
+        do{
+            get(i).style.backgroundColor = get('color').value;
+        }while(i--);
+
+        // set view to edit mode
+        view = 1;
+        switch_view();
+    }
+}
+
 function get(i){
     return document.getElementById(i);
 }
@@ -20,21 +33,6 @@ function grid_toggle(){
 
 function make_png(){
     window.open(get('canvas').toDataURL('image/png'));
-}
-
-function reset(){
-    if(confirm('Reset pixels?')){
-        warn_onbeforeunload = 0;
-
-        i = 624;
-        do{
-            get(i).style.backgroundColor = '#000';
-        }while(i--);
-
-        // set view to edit mode
-        view = 1;
-        switch_view();
-    }
 }
 
 function switch_view(){

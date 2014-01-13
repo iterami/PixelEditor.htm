@@ -29,3 +29,6 @@ input[type=button]{
     height: 20px;
     width: 20px;
 }
+.pixel-grid{
+    border: 1px solid #fff;
+}

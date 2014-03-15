@@ -2,7 +2,7 @@ function fill(){
     if(confirm('Set every pixel to selected color?')){
         i = 624;
         do{
-            get(i).style.backgroundColor = get('color').value;
+            document.getElementById(i).style.backgroundColor = document.getElementById('color').value;
         }while(i--);
 
         // set view to edit mode
@@ -11,28 +11,24 @@ function fill(){
     }
 }
 
-function get(i){
-    return document.getElementById(i);
-}
-
 function grid_toggle(){
     i = 624;
 
     // enable grid if buttons don't have borders, else disable grid
-    if(get(0).style.borderWidth != '1px'){
+    if(document.getElementById(0).style.borderWidth != '1px'){
         do{
-            get(i).style.borderWidth = '1px';
+            document.getElementById(i).style.borderWidth = '1px';
         }while(i--);
 
     }else{
         do{
-            get(i).style.borderWidth = 0;
+            document.getElementById(i).style.borderWidth = 0;
         }while(i--);
     }
 }
 
 function make_png(){
-    window.open(get('canvas').toDataURL('image/png'));
+    window.open(document.getElementById('canvas').toDataURL('image/png'));
 }
 
 function switch_view(){
@@ -40,18 +36,18 @@ function switch_view(){
 
     if(view){// preview mode
         // paint canvas pixels based on colors of divs
-        get('canvas').height = 25;
-        get('canvas').width = 25;
+        document.getElementById('canvas').height = 25;
+        document.getElementById('canvas').width = 25;
         j = 25;
         i = 624;
-        x = get('canvas').getContext('2d');
+        x = document.getElementById('canvas').getContext('2d');
         do{
-            x.fillStyle = get(i).style.background;
+            x.fillStyle = document.getElementById(i).style.background;
             x.fillRect(
-                j * 25 - i - 1,
-                25 - j,
-                1,
-                1
+              j * 25 - i - 1,
+              25 - j,
+              1,
+              1
             );
             x.fillStyle = '#000';
             if(i % 25 === 0){
@@ -60,9 +56,15 @@ function switch_view(){
         }while(i--);
     }
 
-    get('switch-button').value = view ? 'Edit' : 'Preview';
-    get('edit-div').style.display = view ? 'none' : 'inline';
-    get('preview-div').style.display = view ? 'inline' : 'none';
+    document.getElementById('switch-button').value = view
+      ? 'Edit'
+      : 'Preview';
+    document.getElementById('edit-div').style.display = view
+      ? 'none'
+      : 'inline';
+    document.getElementById('preview-div').style.display = view
+      ? 'inline'
+      : 'none';
 }
 
 var i = 624;
@@ -73,17 +75,19 @@ var x = 0;
 
 // create pixel divs
 do{
-    j += '<div class="pixel' + (i % 25 - 12 === 0 || (i > 299 && i < 325) ? ' pixel-grid' : '') + '" id=' + i
-       + ' onclick="warn_onbeforeunload=1;this.style.background=get(\'color\').value" ondragstart="return false"></div>';
+    j += '<div class="pixel' + (i % 25 - 12 === 0 || (i > 299 && i < 325)
+      ? ' pixel-grid'
+      : '') + '" id=' + i
+      + ' onclick="warn_onbeforeunload=1;this.style.background=document.getElementById(\'color\').value" ondragstart="return false"></div>';
     if(i % 25 === 0){
         j += '<br>';
     }
 }while(i--);
 
-get('edit-div').innerHTML = j;
+document.getElementById('edit-div').innerHTML = j;
 
 // set borderWidth of first button to use as grid toggle
-get(0).style.borderWidth = '1px';
+document.getElementById(0).style.borderWidth = '1px';
 
 j = 0;
 

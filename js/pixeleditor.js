@@ -5,7 +5,7 @@ function fill(){
             document.getElementById(i).style.backgroundColor = document.getElementById('color').value;
         }while(i--);
 
-        // set view to edit mode
+        // set view to edit mode to prevent errors
         view = 1;
         switch_view();
     }
@@ -34,14 +34,17 @@ function make_png(){
 function switch_view(){
     view = !view;
 
-    if(view){// preview mode
+    // preview mode
+    if(view){
         // paint canvas pixels based on colors of divs
         document.getElementById('canvas').height = 25;
         document.getElementById('canvas').width = 25;
+
         j = 25;
         i = 624;
         x = document.getElementById('canvas').getContext('2d');
         do{
+            // draw each pixel on the canvas based on div background colors
             x.fillStyle = document.getElementById(i).style.background;
             x.fillRect(
               j * 25 - i - 1,
@@ -49,7 +52,11 @@ function switch_view(){
               1,
               1
             );
+
+            // reset background color to black
             x.fillStyle = '#000';
+
+            // only 25 pixels per row
             if(i % 25 === 0){
                 j -= 1;
             }
@@ -76,9 +83,11 @@ var x = 0;
 // create pixel divs
 do{
     j += '<div class="pixel' + (i % 25 - 12 === 0 || (i > 299 && i < 325)
-      ? ' pixel-grid'
-      : '') + '" id=' + i
-      + ' onclick="warn_onbeforeunload=1;this.style.background=document.getElementById(\'color\').value" ondragstart="return false"></div>';
+        ? ' pixel-grid'
+        : '')
+      + '" id=' + i
+      + ' onclick="warn_onbeforeunload=1;this.style.background=document.getElementById(\'color\').value"'
+      + ' ondragstart="return false"></div>';
     if(i % 25 === 0){
         j += '<br>';
     }
@@ -92,7 +101,8 @@ document.getElementById(0).style.borderWidth = '1px';
 j = 0;
 
 window.onbeforeunload = function(){
-    if(warn_onbeforeunload){// if any pixels have been changed
+    // ask for permission to close if any pixels have been changed
+    if(warn_onbeforeunload){
         return 'Save feature not yet implemented.';
     }
 }

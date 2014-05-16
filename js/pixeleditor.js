@@ -27,10 +27,6 @@ function grid_toggle(){
     }
 }
 
-function make_png(){
-    window.open(document.getElementById('canvas').toDataURL('image/png'));
-}
-
 function switch_view(){
     view = !view;
 

@@ -1,9 +1,9 @@
 function fill(){
     if(confirm('Set every pixel to selected color?')){
-        i = 624;
+        var loop_counter = 624;
         do{
-            document.getElementById(i).style.backgroundColor = document.getElementById('color').value;
-        }while(i--);
+            document.getElementById(loop_counter).style.backgroundColor = document.getElementById('color').value;
+        }while(loop_counter--);
 
         // set view to edit mode to prevent errors
         view = 1;
@@ -12,18 +12,18 @@ function fill(){
 }
 
 function grid_toggle(){
-    i = 624;
+    var loop_counter = 624;
 
     // enable grid if buttons don't have borders, else disable grid
     if(document.getElementById(0).style.borderWidth != '1px'){
         do{
-            document.getElementById(i).style.borderWidth = '1px';
-        }while(i--);
+            document.getElementById(loop_counter).style.borderWidth = '1px';
+        }while(loop_counter--);
 
     }else{
         do{
-            document.getElementById(i).style.borderWidth = 0;
-        }while(i--);
+            document.getElementById(loop_counter).style.borderWidth = 0;
+        }while(loop_counter--);
     }
 }
 
@@ -36,27 +36,27 @@ function switch_view(){
         document.getElementById('canvas').height = 25;
         document.getElementById('canvas').width = 25;
 
-        j = 25;
-        i = 624;
-        x = document.getElementById('canvas').getContext('2d');
+        var canvas = document.getElementById('canvas').getContext('2d');
+        var loop_counter = 624;
+        var row_counter = 25;
         do{
             // draw each pixel on the canvas based on div background colors
-            x.fillStyle = document.getElementById(i).style.background;
-            x.fillRect(
-              j * 25 - i - 1,
-              25 - j,
+            canvas.fillStyle = document.getElementById(loop_counter).style.background;
+            canvas.fillRect(
+              row_counter * 25 - loop_counter - 1,
+              25 - row_counter,
               1,
               1
             );
 
             // reset background color to black
-            x.fillStyle = '#000';
+            canvas.fillStyle = '#000';
 
             // only 25 pixels per row
-            if(i % 25 === 0){
-                j -= 1;
+            if(loop_counter % 25 === 0){
+                row_counter -= 1;
             }
-        }while(i--);
+        }while(loop_counter--);
     }
 
     document.getElementById('switch-button').value = view
@@ -70,31 +70,31 @@ function switch_view(){
       : 'none';
 }
 
-var i = 624;
-var j = '';
 var view = 0;
 var warn_onbeforeunload = 0;
-var x = 0;
 
 // create pixel divs
+var output = '';
+var loop_counter = 624;
 do{
-    j += '<div class="pixel' + (i % 25 - 12 === 0 || (i > 299 && i < 325)
+    output += '<div class="pixel'
+      + (loop_counter % 25 - 12 === 0 || (loop_counter > 299 && loop_counter < 325)
         ? ' pixel-grid'
-        : '')
-      + '" id=' + i
+        : ''
+      )
+      + '" id=' + loop_counter
       + ' onclick="warn_onbeforeunload=1;this.style.background=document.getElementById(\'color\').value"'
       + ' ondragstart="return false"></div>';
-    if(i % 25 === 0){
-        j += '<br>';
-    }
-}while(i--);
 
-document.getElementById('edit-div').innerHTML = j;
+    if(loop_counter % 25 === 0){
+        output += '<br>';
+    }
+}while(loop_counter--);
+
+document.getElementById('edit-div').innerHTML = output;
 
 // set borderWidth of first button to use as grid toggle
 document.getElementById(0).style.borderWidth = '1px';
-
-j = 0;
 
 window.onbeforeunload = function(){
     // ask for permission to close if any pixels have been changed

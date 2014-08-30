@@ -2,7 +2,7 @@ function fill(){
     if(confirm('Set every pixel to selected color?')){
         var loop_counter = 624;
         do{
-            document.getElementById(loop_counter).style.backgroundColor = document.getElementById('color').value;
+            update_pixel(document.getElementById(loop_counter));
         }while(loop_counter--);
 
         // set view to edit mode to prevent errors
@@ -70,6 +70,12 @@ function switch_view(){
       : 'none';
 }
 
+function update_pixel(pixel){
+    warn_onbeforeunload = true;
+
+    pixel.style.background = document.getElementById('color').value;
+}
+
 var view = 0;
 var warn_onbeforeunload = false;
 
@@ -83,7 +89,7 @@ do{
         : ''
       )
       + '" id=' + loop_counter
-      + ' onclick="warn_onbeforeunload=true;this.style.background=document.getElementById(\'color\').value"'
+      + ' onclick="update_pixel(this)"'
       + ' ondragstart="return false"></div>';
 
     if(loop_counter % 25 === 0){

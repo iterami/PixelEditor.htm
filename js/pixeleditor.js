@@ -71,7 +71,7 @@ function switch_view(){
 }
 
 var view = 0;
-var warn_onbeforeunload = 0;
+var warn_onbeforeunload = false;
 
 // create pixel divs
 var output = '';
@@ -83,7 +83,7 @@ do{
         : ''
       )
       + '" id=' + loop_counter
-      + ' onclick="warn_onbeforeunload=1;this.style.background=document.getElementById(\'color\').value"'
+      + ' onclick="warn_onbeforeunload=true;this.style.background=document.getElementById(\'color\').value"'
       + ' ondragstart="return false"></div>';
 
     if(loop_counter % 25 === 0){

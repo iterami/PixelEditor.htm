@@ -28,3 +28,7 @@ input{
 .pixel-grid{
     border: 1px solid #fff;
 }
+#preview-div{
+    display: none;
+    line-height: 20px;
+}

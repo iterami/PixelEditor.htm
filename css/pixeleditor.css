@@ -18,13 +18,9 @@ input{
     font-size: 100%;
     text-align: center;
 }
-input[type=button]{
-    cursor: pointer;
-}
 .pixel{
     background: #000;
     border: 1px solid #555;
-    cursor: pointer;
     display: inline-block;
     height: 20px;
     width: 20px;

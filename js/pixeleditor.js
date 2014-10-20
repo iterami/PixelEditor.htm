@@ -4,10 +4,6 @@ function fill(){
         do{
             update_pixel(document.getElementById(loop_counter));
         }while(loop_counter--);
-
-        // set view to edit mode to prevent errors
-        view = 1;
-        switch_view();
     }
 }
 
@@ -46,7 +42,7 @@ function init(){
         }
     }while(loop_counter--);
 
-    document.getElementById('edit-div').innerHTML = output;
+    document.getElementById('edit').innerHTML = output;
 
     // set borderWidth of first button to use as grid toggle
     document.getElementById(0).style.borderWidth = '1px';
@@ -84,15 +80,18 @@ function switch_view(){
         }while(loop_counter--);
     }
 
+    document.getElementById('canvas').style.display = view
+      ? 'block'
+      : 'none';
+    document.getElementById('controls').style.display = view
+      ? 'none'
+      : 'inline-block';
+    document.getElementById('edit').style.display = view
+      ? 'none'
+      : 'block';
     document.getElementById('switch-button').value = view
       ? 'Edit'
       : 'Preview';
-    document.getElementById('edit-div').style.display = view
-      ? 'none'
-      : 'inline';
-    document.getElementById('preview-div').style.display = view
-      ? 'inline'
-      : 'none';
 }
 
 function update_pixel(pixel){

@@ -8,8 +8,10 @@ canvas{
 	height: 25px;
 	width: 25px;
 }
-.controls{
-    line-height: 20px;
+#controls,
+#state{
+    display: inline-block;
+    line-height: 2em;
     padding: 4px;
 }
 input{
@@ -28,7 +30,6 @@ input{
 .pixel-grid{
     border: 1px solid #fff;
 }
-#preview-div{
+.preview{
     display: none;
-    line-height: 20px;
 }

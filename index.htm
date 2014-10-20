@@ -3,17 +3,16 @@
 <title>PixelEditor.htm</title>
 <link href=css/pixeleditor.css rel=stylesheet>
 
-<div class=controls>
+<div id=state>
+    <input id=switch-button onclick=switch_view() type=button value=Preview>
+</div>
+<div id=controls>
     <input id=color type=color value=#ffffff>
     <input onclick=fill() type=button value=Fill>
     <input onclick=grid_toggle() type=button value=Grid>
-    <input id=switch-button onclick=switch_view() type=button value=Preview>
 </div>
 
-<div id=edit-div></div>
-
-<div id=preview-div>
-    <canvas id=canvas></canvas>
-</div>
+<div id=edit></div>
+<canvas class=preview id=canvas></canvas>
 
 <script src=js/pixeleditor.js></script>

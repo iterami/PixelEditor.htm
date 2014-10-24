@@ -10,7 +10,7 @@ function fill(){
 function grid_toggle(){
     var loop_counter = 624;
 
-    // enable grid if buttons don't have borders, else disable grid
+    // Enable grid if buttons don't have borders, else disable grid.
     if(document.getElementById(0).style.borderWidth != '1px'){
         do{
             document.getElementById(loop_counter).style.borderWidth = '1px';
@@ -24,7 +24,7 @@ function grid_toggle(){
 }
 
 function init(){
-    // create pixel divs
+    // Create pixel divs.
     var output = '';
     var loop_counter = 624;
     do{
@@ -44,16 +44,16 @@ function init(){
 
     document.getElementById('edit').innerHTML = output;
 
-    // set borderWidth of first button to use as grid toggle
+    // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 }
 
 function switch_view(){
     view = !view;
 
-    // preview mode
+    // Preview mode.
     if(view){
-        // paint canvas pixels based on colors of divs
+        // Paint canvas pixels based on colors of divs.
         document.getElementById('canvas').height = 25;
         document.getElementById('canvas').width = 25;
 
@@ -61,7 +61,7 @@ function switch_view(){
         var loop_counter = 624;
         var row_counter = 25;
         do{
-            // draw each pixel on the canvas based on div background colors
+            // Draw each pixel on the canvas based on div background colors.
             canvas.fillStyle = document.getElementById(loop_counter).style.background;
             canvas.fillRect(
               row_counter * 25 - loop_counter - 1,
@@ -70,10 +70,10 @@ function switch_view(){
               1
             );
 
-            // reset background color to black
+            // Reset background color to black.
             canvas.fillStyle = '#000';
 
-            // only 25 pixels per row
+            // Only 25 pixels per row.
             if(loop_counter % 25 === 0){
                 row_counter -= 1;
             }
@@ -104,7 +104,7 @@ var view = 0;
 var warn_onbeforeunload = false;
 
 window.onbeforeunload = function(){
-    // ask for permission to close if any pixels have been changed
+    // Ask for permission to close if any pixels have been changed.
     if(warn_onbeforeunload){
         return 'Save feature not yet implemented.';
     }

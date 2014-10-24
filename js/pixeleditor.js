@@ -1,10 +1,12 @@
 function fill(){
-    if(confirm('Set every pixel to selected color?')){
-        var loop_counter = 624;
-        do{
-            update_pixel(document.getElementById(loop_counter));
-        }while(loop_counter--);
+    if(!confirm('Set every pixel to selected color?')){
+        return;
     }
+
+    var loop_counter = 624;
+    do{
+        update_pixel(document.getElementById(loop_counter));
+    }while(loop_counter--);
 }
 
 function grid_toggle(){

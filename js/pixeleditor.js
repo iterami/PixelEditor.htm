@@ -10,19 +10,17 @@ function fill(){
 }
 
 function grid_toggle(){
+    var border_width = 0;
     var loop_counter = 624;
 
-    // Enable grid if buttons don't have borders, else disable grid.
+    // If buttons don't currently have borders, add borders.
     if(document.getElementById(0).style.borderWidth != '1px'){
-        do{
-            document.getElementById(loop_counter).style.borderWidth = '1px';
-        }while(loop_counter--);
-
-    }else{
-        do{
-            document.getElementById(loop_counter).style.borderWidth = 0;
-        }while(loop_counter--);
+        border_width = '1px';
     }
+
+    do{
+        document.getElementById(loop_counter).style.borderWidth = border_width;
+    }while(loop_counter--);
 }
 
 function init(){

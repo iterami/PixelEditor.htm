@@ -34,8 +34,7 @@ function init(){
             : ''
           )
           + '" id=' + loop_counter
-         + ' onclick="update_pixel(this)"'
-          + ' ondragstart="return false"></div>';
+          + ' onclick="update_pixel(this)"></div>';
 
         if(loop_counter % 25 === 0){
             output += '<br>';
@@ -51,7 +50,6 @@ function init(){
 function switch_view(){
     view = !view;
 
-    // Preview mode.
     if(view){
         // Paint canvas pixels based on colors of divs.
         document.getElementById('canvas').height = 25;
@@ -91,7 +89,7 @@ function switch_view(){
       : 'block';
     document.getElementById('switch-button').value = view
       ? 'Edit'
-      : 'Preview';
+      : 'View';
 }
 
 function update_pixel(pixel){

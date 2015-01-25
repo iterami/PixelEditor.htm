@@ -23,30 +23,6 @@ function grid_toggle(){
     }while(loop_counter--);
 }
 
-function init(){
-    // Create pixel divs.
-    var output = '';
-    var loop_counter = 624;
-    do{
-        output += '<div class="pixel'
-          + (loop_counter % 25 - 12 === 0 || (loop_counter > 299 && loop_counter < 325)
-            ? ' pixel-grid'
-            : ''
-          )
-          + '" id=' + loop_counter
-          + ' onclick="update_pixel(this)"></div>';
-
-        if(loop_counter % 25 === 0){
-            output += '<br>';
-        }
-    }while(loop_counter--);
-
-    document.getElementById('edit').innerHTML = output;
-
-    // Set borderWidth of first button to use as grid toggle.
-    document.getElementById(0).style.borderWidth = '1px';
-}
-
 function switch_view(){
     view = !view;
 
@@ -108,4 +84,26 @@ window.onbeforeunload = function(){
     }
 };
 
-window.onload = init;
+window.onload = function(){
+    // Create pixel divs.
+    var output = '';
+    var loop_counter = 624;
+    do{
+        output += '<div class="pixel'
+          + (loop_counter % 25 - 12 === 0 || (loop_counter > 299 && loop_counter < 325)
+            ? ' pixel-grid'
+            : ''
+          )
+          + '" id=' + loop_counter
+          + ' onclick="update_pixel(this)"></div>';
+
+        if(loop_counter % 25 === 0){
+            output += '<br>';
+        }
+    }while(loop_counter--);
+
+    document.getElementById('edit').innerHTML = output;
+
+    // Set borderWidth of first button to use as grid toggle.
+    document.getElementById(0).style.borderWidth = '1px';
+};

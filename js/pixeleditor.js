@@ -3,7 +3,7 @@ function fill(){
         return;
     }
 
-    var loop_counter = 624;
+    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
     do{
         update_pixel(document.getElementById(loop_counter));
     }while(loop_counter--);
@@ -11,7 +11,7 @@ function fill(){
 
 function grid_toggle(){
     var border_width = 0;
-    var loop_counter = 624;
+    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
 
     // If buttons don't currently have borders, add borders.
     if(document.getElementById(0).style.borderWidth != '1px'){
@@ -23,23 +23,59 @@ function grid_toggle(){
     }while(loop_counter--);
 }
 
+function setup_dimensions(skip){
+    var dimensions = document.getElementById('dimensions').value;
+
+    if(!skip){
+        dimensions = parseInt(window.prompt('Enter number of pixels on one side:', dimensions) || dimensions);
+    }
+
+    document.getElementById('dimensions').value = dimensions;
+
+    // Create pixel divs.
+    var dimensions_half = Math.floor(dimensions / 2);
+    var dimensions_squared = Math.pow(dimensions, 2);
+    var loop_counter = Math.pow(dimensions, 2) - 1;
+    var output = '';
+    do{
+        output += '<div class="pixel'
+          + (loop_counter % dimensions - dimensions_half === 0 || (loop_counter > dimensions_squared / 2 - dimensions_half - 1 && loop_counter < dimensions_squared / 2 + dimensions_half)
+            ? ' pixel-grid'
+            : ''
+          )
+          + '" id=' + loop_counter
+          + ' onclick="update_pixel(this)"></div>';
+
+        if(loop_counter % dimensions === 0){
+            output += '<br>';
+        }
+    }while(loop_counter--);
+
+    document.getElementById('edit').innerHTML = output;
+
+    // Set borderWidth of first button to use as grid toggle.
+    document.getElementById(0).style.borderWidth = '1px';
+}
+
 function switch_view(){
     view = !view;
 
     if(view){
+        var dimensions = parseInt(document.getElementById('dimensions').value);
+
         // Paint canvas pixels based on colors of divs.
-        document.getElementById('canvas').height = 25;
-        document.getElementById('canvas').width = 25;
+        document.getElementById('canvas').height = dimensions;
+        document.getElementById('canvas').width = dimensions;
 
         var canvas = document.getElementById('canvas').getContext('2d');
-        var loop_counter = 624;
-        var row_counter = 25;
+        var loop_counter = Math.pow(dimensions, 2) - 1;
+        var row_counter = parseInt(document.getElementById('dimensions').value);
         do{
             // Draw each pixel on the canvas based on div background colors.
             canvas.fillStyle = document.getElementById(loop_counter).style.background;
             canvas.fillRect(
-              row_counter * 25 - loop_counter - 1,
-              25 - row_counter,
+              row_counter * dimensions - loop_counter - 1,
+              dimensions - row_counter,
               1,
               1
             );
@@ -47,8 +83,8 @@ function switch_view(){
             // Reset background color to black.
             canvas.fillStyle = '#000';
 
-            // Only 25 pixels per row.
-            if(loop_counter % 25 === 0){
+            // Only dimensions pixels per row.
+            if(loop_counter % dimensions === 0){
                 row_counter -= 1;
             }
         }while(loop_counter--);
@@ -85,25 +121,5 @@ window.onbeforeunload = function(){
 };
 
 window.onload = function(){
-    // Create pixel divs.
-    var output = '';
-    var loop_counter = 624;
-    do{
-        output += '<div class="pixel'
-          + (loop_counter % 25 - 12 === 0 || (loop_counter > 299 && loop_counter < 325)
-            ? ' pixel-grid'
-            : ''
-          )
-          + '" id=' + loop_counter
-          + ' onclick="update_pixel(this)"></div>';
-
-        if(loop_counter % 25 === 0){
-            output += '<br>';
-        }
-    }while(loop_counter--);
-
-    document.getElementById('edit').innerHTML = output;
-
-    // Set borderWidth of first button to use as grid toggle.
-    document.getElementById(0).style.borderWidth = '1px';
+    setup_dimensions(true);
 };

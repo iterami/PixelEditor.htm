@@ -1,5 +1,5 @@
 function fill(){
-    if(!confirm('Set every pixel to selected color?')){
+    if(!window.confirm('Set every pixel to selected color?')){
         return;
     }
 

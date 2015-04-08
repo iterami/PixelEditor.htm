@@ -10,14 +10,12 @@ function fill(){
 }
 
 function grid_toggle(){
-    var border_width = 0;
-    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
-
     // If buttons don't currently have borders, add borders.
-    if(document.getElementById(0).style.borderWidth != '1px'){
-        border_width = '1px';
-    }
+    var border_width = document.getElementById(0).style.borderWidth != '1px'
+      ? '1px'
+      : 0;
 
+    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
     do{
         document.getElementById(loop_counter).style.borderWidth = border_width;
     }while(loop_counter--);
@@ -27,7 +25,16 @@ function setup_dimensions(skip){
     var dimensions = document.getElementById('dimensions').value;
 
     if(!skip){
-        dimensions = parseInt(window.prompt('Enter number of pixels on one side:', dimensions) || dimensions);
+        dimensions = window.prompt(
+          'Enter number of pixels on one side:',
+          dimensions
+        );
+
+        if(dimensions == null){
+            return;
+        }
+
+        dimensions = parseInt(dimensions);
     }
 
     document.getElementById('dimensions').value = dimensions;

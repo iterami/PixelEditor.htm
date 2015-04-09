@@ -62,6 +62,8 @@ function setup_dimensions(skip){
 
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
+
+    warn_onbeforeunload = false;
 }
 
 function switch_view(){

@@ -1,1 +1,4 @@
-A pixel editor tool. Customize current color, click divs to set pixel colors, and save your image as a PNG when you are done.
+PixelEditor.htm
+---------------
+
+A pixel editor tool. Click divs to set pixel colors to a custom color and save your image as a PNG when you are done.

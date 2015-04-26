@@ -6,5 +6,5 @@ A pixel editor tool. Click divs to set pixel colors to a custom color and save y
 ---
 
 Action             | Key
--------------------|------
-Update Pixel Color | Click
+-------------------|------------
+Update Pixel Color | Mouse Click

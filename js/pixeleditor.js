@@ -129,6 +129,4 @@ window.onbeforeunload = function(){
     }
 };
 
-window.onload = function(){
-    setup_dimensions(true);
-};
+window.onload = setup_dimensions;

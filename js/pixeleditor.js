@@ -1,3 +1,5 @@
+'use strict';
+
 function fill(){
     if(!window.confirm('Set every pixel to selected color?')){
         return;

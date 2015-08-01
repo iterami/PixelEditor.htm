@@ -23,6 +23,14 @@ function grid_toggle(){
     }while(loop_counter--);
 }
 
+function hover_pixel(pixel){
+    var dimensions = parseInt(document.getElementById('dimensions').value);
+    var dimensions_half = Math.floor(dimensions / 2);
+
+    document.getElementById('x').innerHTML = dimensions_half - pixel.id % dimensions;
+    document.getElementById('y').innerHTML = dimensions_half - Math.floor(pixel.id / dimensions);
+}
+
 function setup_dimensions(skip){
     var dimensions = document.getElementById('dimensions').value;
 
@@ -53,7 +61,7 @@ function setup_dimensions(skip){
             : ''
           )
           + '" id=' + loop_counter
-          + ' onclick="update_pixel(this)"></div>';
+          + ' onclick="update_pixel(this)" onmouseover="hover_pixel(this)"></div>';
 
         if(loop_counter % dimensions === 0){
             output += '<br>';

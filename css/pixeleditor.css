@@ -19,6 +19,10 @@ input{
     font-size: 100%;
     text-align: center;
 }
+input[disabled]{
+    border: 0;
+    width: 25px;
+}
 .pixel{
     background: #000;
     border: 1px solid #555;

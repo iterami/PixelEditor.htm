@@ -27,8 +27,9 @@ function hover_pixel(pixel){
     var dimensions = parseInt(document.getElementById('dimensions').value);
     var dimensions_half = Math.floor(dimensions / 2);
 
-    document.getElementById('x').innerHTML = dimensions_half - pixel.id % dimensions;
-    document.getElementById('y').innerHTML = dimensions_half - Math.floor(pixel.id / dimensions);
+    document.getElementById('color-hover').innerHTML = pixel.style.background || 'rgb(0, 0, 0)';
+    document.getElementById('x').value = dimensions_half - pixel.id % dimensions;
+    document.getElementById('y').value = dimensions_half - Math.floor(pixel.id / dimensions);
 }
 
 function setup_dimensions(skip){

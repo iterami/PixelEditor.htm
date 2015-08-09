@@ -6,7 +6,7 @@ body{
     margin-top: 2em;
 }
 canvas{
-	border: 1px solid #777;
+    border: 1px solid #777;
     display: none;
 }
 input{

@@ -3,20 +3,22 @@
 <title>PixelEditor.htm</title>
 <link href=css/pixeleditor.css rel=stylesheet>
 
-<div id=state>
-    <input id=switch-button onclick=switch_view() type=button value=View>
-</div>
-<div id=controls>
-    <input id=color type=color value=#ffffff>
-    <input onclick=fill() type=button value=Fill>
-    <input onclick=grid_toggle() type=button value=Grid>
-    <input onclick=setup_dimensions() id=dimensions type=button value=25>
-    <input disabled id=x>
-    <input disabled id=y>
-    <span id=color-hover></span>
+<div id=toolbar>
+    <span id=state>
+        <input id=switch-button onclick=switch_view() type=button value=View>
+    </span>
+    <span id=controls>
+        <input id=color type=color value=#ffffff>
+        <input onclick=fill() type=button value=Fill>
+        <input onclick=grid_toggle() type=button value=Grid>
+        <input onclick=setup_dimensions() id=dimensions type=button value=25>
+        <input disabled id=x>
+        <input disabled id=y>
+        <span id=color-hover></span>
+    </span>
 </div>
 
 <div id=edit></div>
-<canvas class=view id=canvas></canvas>
+<canvas id=canvas></canvas>
 
 <script src=js/pixeleditor.js></script>

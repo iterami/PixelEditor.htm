@@ -3,14 +3,11 @@ body{
     color: #aaa;
     font-family: sans-serif;
     line-height: 1px;
+    margin-top: 2em;
 }
 canvas{
 	border: 1px solid #777;
-}
-#controls,
-#state{
-    display: inline-block;
-    line-height: 2em;
+    display: none;
 }
 input{
     background: #000;
@@ -34,6 +31,9 @@ input[disabled]{
 .pixel-grid{
     border: 1px solid #fff;
 }
-.view{
-    display: none;
+#toolbar{
+    display: inline-block;
+    line-height: 2em;
+    position: fixed;
+    top: 0;
 }

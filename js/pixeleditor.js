@@ -70,6 +70,7 @@ function setup_dimensions(skip){
     }while(loop_counter--);
 
     document.getElementById('edit').innerHTML = output;
+    document.getElementById('edit').style.minWidth = (dimensions * 22) + 'px';
 
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';

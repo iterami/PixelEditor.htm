@@ -16,7 +16,8 @@ input{
     font-size: 100%;
     text-align: center;
 }
-input[disabled]{
+input[readonly]{
+    cursor: default;
     border: 0;
     width: 25px;
 }

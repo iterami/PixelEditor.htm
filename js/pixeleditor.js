@@ -5,7 +5,7 @@ function fill(){
         return;
     }
 
-    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
+    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2) - 1;
     do{
         update_pixel(document.getElementById(loop_counter));
     }while(loop_counter--);
@@ -17,14 +17,17 @@ function grid_toggle(){
       ? '1px'
       : 0;
 
-    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value), 2) - 1;
+    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2) - 1;
     do{
         document.getElementById(loop_counter).style.borderWidth = border_width;
     }while(loop_counter--);
 }
 
 function hover_pixel(pixel){
-    var dimensions = parseInt(document.getElementById('dimensions').value);
+    var dimensions = parseInt(
+      document.getElementById('dimensions').value,
+      10
+    );
     var dimensions_half = Math.floor(dimensions / 2);
 
     document.getElementById('color-hover').innerHTML = pixel.style.background || 'rgb(0, 0, 0)';
@@ -45,7 +48,10 @@ function setup_dimensions(skip){
             return;
         }
 
-        dimensions = parseInt(dimensions);
+        dimensions = parseInt(
+          dimensions,
+          10
+        );
     }
 
     document.getElementById('dimensions').value = dimensions;
@@ -82,7 +88,10 @@ function switch_view(){
     view = !view;
 
     if(view){
-        var dimensions = parseInt(document.getElementById('dimensions').value);
+        var dimensions = parseInt(
+          document.getElementById('dimensions').value,
+          10
+        );
 
         // Paint canvas pixels based on colors of divs.
         document.getElementById('canvas').height = dimensions;
@@ -90,7 +99,10 @@ function switch_view(){
 
         var canvas = document.getElementById('canvas').getContext('2d');
         var loop_counter = Math.pow(dimensions, 2) - 1;
-        var row_counter = parseInt(document.getElementById('dimensions').value);
+        var row_counter = parseInt(
+          document.getElementById('dimensions').value,
+          10
+        );
         do{
             // Draw each pixel on the canvas based on div background colors.
             canvas.fillStyle = document.getElementById(loop_counter).style.background;

@@ -157,6 +157,7 @@ window.onload = function(e){
     document.getElementById('dimensions').onclick = function(e){
         setup_dimensions();
     }
+    document.getElementById('fill').onclick = fill;
     document.getElementById('grid-toggle').onclick = grid_toggle;
     document.getElementById('switch-button').onclick = switch_view;
 

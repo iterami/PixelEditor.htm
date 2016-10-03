@@ -153,4 +153,12 @@ window.onbeforeunload = function(){
     }
 };
 
-window.onload = setup_dimensions;
+window.onload = function(e){
+    document.getElementById('dimensions').onclick = function(e){
+        setup_dimensions();
+    }
+    document.getElementById('grid-toggle').onclick = grid_toggle;
+    document.getElementById('switch-button').onclick = switch_view;
+
+    setup_dimensions(true);
+};

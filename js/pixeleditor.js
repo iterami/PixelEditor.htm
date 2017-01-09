@@ -30,7 +30,7 @@ function hover_pixel(pixel){
     );
     var dimensions_half = Math.floor(dimensions / 2);
 
-    document.getElementById('color-hover').innerHTML = pixel.style.background || 'rgb(0, 0, 0)';
+    document.getElementById('color-hover').innerHTML = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
     document.getElementById('x').value = dimensions_half - pixel.id % dimensions;
     document.getElementById('y').value = dimensions_half - Math.floor(pixel.id / dimensions);
 }
@@ -105,7 +105,7 @@ function switch_view(){
         );
         do{
             // Draw each pixel on the canvas based on div background colors.
-            canvas.fillStyle = document.getElementById(loop_counter).style.background;
+            canvas.fillStyle = document.getElementById(loop_counter).style.backgroundColor;
             canvas.fillRect(
               row_counter * dimensions - loop_counter - 1,
               dimensions - row_counter,

@@ -146,13 +146,6 @@ function update_pixel(pixel){
 var view = 0;
 var warn_onbeforeunload = false;
 
-window.onbeforeunload = function(){
-    // Ask for permission to close if any pixels have been changed.
-    if(warn_onbeforeunload){
-        return 'Save feature not yet implemented.';
-    }
-};
-
 window.onload = function(e){
     document.getElementById('dimensions').onclick = function(e){
         setup_dimensions();
@@ -162,4 +155,11 @@ window.onload = function(e){
     document.getElementById('switch-button').onclick = switch_view;
 
     setup_dimensions(true);
+
+    window.onbeforeunload = function(){
+        // Ask for permission to close if any pixels have been changed.
+        if(warn_onbeforeunload){
+            return 'Save feature not yet implemented.';
+        }
+    };
 };

@@ -30,7 +30,7 @@ function hover_pixel(pixel){
     );
     var dimensions_half = Math.floor(dimensions / 2);
 
-    document.getElementById('color-hover').innerHTML = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
+    document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
     document.getElementById('x').value = dimensions_half - pixel.id % dimensions;
     document.getElementById('y').value = dimensions_half - Math.floor(pixel.id / dimensions);
 }
@@ -62,13 +62,8 @@ function setup_dimensions(skip){
     var loop_counter = Math.pow(dimensions, 2) - 1;
     var output = '';
     do{
-        output += '<div class="pixel'
-          + (loop_counter % dimensions - dimensions_half === 0 || (loop_counter > dimensions_squared / 2 - dimensions_half - 1 && loop_counter < dimensions_squared / 2 + dimensions_half)
-            ? ' pixel-grid'
-            : ''
-          )
-          + '" id=' + loop_counter
-          + ' onclick="update_pixel(this)" onmouseover="hover_pixel(this)"></div>';
+        output += '<input class=gridbutton id=' + loop_counter
+          + ' onclick="update_pixel(this)" onmouseover="hover_pixel(this)" style="border-color:#aaa;border-width:1px;margin:0" type=button>';
 
         if(loop_counter % dimensions === 0){
             output += '<br>';

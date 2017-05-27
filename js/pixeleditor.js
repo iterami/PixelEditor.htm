@@ -28,11 +28,10 @@ function hover_pixel(pixel){
       document.getElementById('dimensions').value,
       10
     );
-    var dimensions_half = Math.floor(dimensions / 2);
 
     document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
-    document.getElementById('x').value = dimensions_half - pixel.id % dimensions;
-    document.getElementById('y').value = dimensions_half - Math.floor(pixel.id / dimensions);
+    document.getElementById('x').value = dimensions - pixel.id % dimensions;
+    document.getElementById('y').value = dimensions - Math.floor(pixel.id / dimensions);
 }
 
 function setup_dimensions(skip){
@@ -57,8 +56,6 @@ function setup_dimensions(skip){
     document.getElementById('dimensions').value = dimensions;
 
     // Create pixel divs.
-    var dimensions_half = Math.floor(dimensions / 2);
-    var dimensions_squared = Math.pow(dimensions, 2);
     var loop_counter = Math.pow(dimensions, 2) - 1;
     var output = '';
     do{

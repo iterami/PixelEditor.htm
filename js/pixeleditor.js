@@ -34,6 +34,24 @@ function hover_pixel(pixel){
     document.getElementById('y').value = dimensions - Math.floor(pixel.id / dimensions);
 }
 
+function repo_init(){
+    document.getElementById('dimensions').onclick = function(e){
+        setup_dimensions();
+    }
+    document.getElementById('fill').onclick = fill;
+    document.getElementById('grid-toggle').onclick = grid_toggle;
+    document.getElementById('switch-button').onclick = switch_view;
+
+    setup_dimensions(true);
+
+    window.onbeforeunload = function(){
+        // Ask for permission to close if any pixels have been changed.
+        if(warn_onbeforeunload){
+            return 'Save feature not yet implemented.';
+        }
+    };
+}
+
 function setup_dimensions(skip){
     var dimensions = document.getElementById('dimensions').value;
 
@@ -137,21 +155,3 @@ function update_pixel(pixel){
 
 var view = 0;
 var warn_onbeforeunload = false;
-
-window.onload = function(e){
-    document.getElementById('dimensions').onclick = function(e){
-        setup_dimensions();
-    }
-    document.getElementById('fill').onclick = fill;
-    document.getElementById('grid-toggle').onclick = grid_toggle;
-    document.getElementById('switch-button').onclick = switch_view;
-
-    setup_dimensions(true);
-
-    window.onbeforeunload = function(){
-        // Ask for permission to close if any pixels have been changed.
-        if(warn_onbeforeunload){
-            return 'Save feature not yet implemented.';
-        }
-    };
-};

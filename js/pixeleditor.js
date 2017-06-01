@@ -35,6 +35,17 @@ function hover_pixel(pixel){
 }
 
 function repo_init(){
+    core_input_binds_add({
+      'beforeunload': {
+        'todo': function(){
+            // Ask for permission to close if any pixels have been changed.
+            if(warn_onbeforeunload){
+                return 'Save feature not yet implemented.';
+            }
+        },
+      },
+    });
+
     document.getElementById('dimensions').onclick = function(e){
         setup_dimensions();
     }
@@ -43,13 +54,6 @@ function repo_init(){
     document.getElementById('switch-button').onclick = switch_view;
 
     setup_dimensions(true);
-
-    window.onbeforeunload = function(){
-        // Ask for permission to close if any pixels have been changed.
-        if(warn_onbeforeunload){
-            return 'Save feature not yet implemented.';
-        }
-    };
 }
 
 function setup_dimensions(skip){

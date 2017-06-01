@@ -39,7 +39,7 @@ function repo_init(){
       'beforeunload': {
         'todo': function(){
             // Ask for permission to close if any pixels have been changed.
-            if(warn_onbeforeunload){
+            if(warn_beforeunload){
                 return 'Save feature not yet implemented.';
             }
         },
@@ -95,7 +95,7 @@ function setup_dimensions(skip){
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 
-    warn_onbeforeunload = false;
+    warn_beforeunload = false;
 }
 
 function switch_view(){
@@ -152,10 +152,10 @@ function switch_view(){
 }
 
 function update_pixel(pixel){
-    warn_onbeforeunload = true;
+    warn_beforeunload = true;
 
     pixel.style.background = document.getElementById('color').value;
 }
 
 var view = 0;
-var warn_onbeforeunload = false;
+var warn_beforeunload = false;

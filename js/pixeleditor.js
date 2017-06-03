@@ -35,7 +35,7 @@ function hover_pixel(pixel){
 }
 
 function repo_init(){
-    core_input_binds_add({
+    core_events_bind({
       'beforeunload': {
         'todo': function(){
             // Ask for permission to close if any pixels have been changed.

@@ -35,6 +35,9 @@ function hover_pixel(pixel){
 }
 
 function repo_init(){
+    core_repo_init({
+      'title': 'PixelEditor.htm',
+    });
     core_events_bind({
       'beforeunload': {
         'todo': function(){

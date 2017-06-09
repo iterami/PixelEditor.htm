@@ -36,9 +36,6 @@ function hover_pixel(pixel){
 
 function repo_init(){
     core_repo_init({
-      'title': 'PixelEditor.htm',
-    });
-    core_events_bind({
       'beforeunload': {
         'todo': function(){
             // Ask for permission to close if any pixels have been changed.
@@ -47,6 +44,7 @@ function repo_init(){
             }
         },
       },
+      'title': 'PixelEditor.htm',
     });
 
     document.getElementById('dimensions').onclick = function(e){

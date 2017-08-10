@@ -5,7 +5,7 @@ function fill(){
         return;
     }
 
-    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2) - 1;
+    var loop_counter = pixelcount - 1;
     do{
         update_pixel(document.getElementById(loop_counter));
     }while(loop_counter--);
@@ -17,7 +17,7 @@ function grid_toggle(){
       ? '1px'
       : 0;
 
-    var loop_counter = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2) - 1;
+    var loop_counter = pixelcount - 1;
     do{
         document.getElementById(loop_counter).style.borderWidth = border_width;
     }while(loop_counter--);
@@ -96,6 +96,7 @@ function setup_dimensions(skip){
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 
+    pixelcount = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2);
     warn_beforeunload = false;
 }
 
@@ -158,5 +159,6 @@ function update_pixel(pixel){
     pixel.style.background = document.getElementById('color').value;
 }
 
+var pixelcount = 0;
 var view = 0;
 var warn_beforeunload = false;

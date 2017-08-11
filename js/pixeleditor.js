@@ -77,9 +77,10 @@ function setup_dimensions(skip){
     }
 
     document.getElementById('dimensions').value = dimensions;
+    pixelcount = Math.pow(dimensions, 2);
 
     // Create pixel divs.
-    var loop_counter = Math.pow(dimensions, 2) - 1;
+    var loop_counter = pixelcount - 1;
     var output = '';
     do{
         output += '<input class=gridbutton id=' + loop_counter
@@ -96,7 +97,6 @@ function setup_dimensions(skip){
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 
-    pixelcount = Math.pow(parseInt(document.getElementById('dimensions').value, 10), 2);
     warn_beforeunload = false;
 }
 

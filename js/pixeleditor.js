@@ -160,5 +160,5 @@ function update_pixel(pixel){
 }
 
 var pixelcount = 0;
-var view = 0;
+var view = false;
 var warn_beforeunload = false;

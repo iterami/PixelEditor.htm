@@ -58,7 +58,8 @@ function repo_init(){
 }
 
 function setup_dimensions(skip){
-    var dimensions = document.getElementById('dimensions').value;
+    var element = document.getElementById('dimensions');
+    var dimensions = element.value;
 
     if(!skip){
         dimensions = window.prompt(
@@ -76,7 +77,7 @@ function setup_dimensions(skip){
         );
     }
 
-    document.getElementById('dimensions').value = dimensions;
+    element.value = dimensions;
     pixelcount = Math.pow(dimensions, 2);
 
     // Create pixel divs.
@@ -91,8 +92,9 @@ function setup_dimensions(skip){
         }
     }while(loop_counter--);
 
-    document.getElementById('edit').innerHTML = output;
-    document.getElementById('edit').style.minWidth = (dimensions * 22) + 'px';
+    element = document.getElementById('edit');
+    element.innerHTML = output;
+    element.style.minWidth = (dimensions * 22) + 'px';
 
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
@@ -102,6 +104,7 @@ function setup_dimensions(skip){
 
 function switch_view(){
     view = !view;
+    var element = document.getElementById('canvas');
 
     if(view){
         var dimensions = parseInt(
@@ -110,10 +113,10 @@ function switch_view(){
         );
 
         // Paint canvas pixels based on colors of divs.
-        document.getElementById('canvas').height = dimensions;
-        document.getElementById('canvas').width = dimensions;
+        element.height = dimensions;
+        element.width = dimensions;
 
-        var canvas = document.getElementById('canvas').getContext('2d');
+        var canvas = element.getContext('2d');
         var loop_counter = Math.pow(dimensions, 2) - 1;
         var row_counter = parseInt(
           document.getElementById('dimensions').value,
@@ -139,7 +142,7 @@ function switch_view(){
         }while(loop_counter--);
     }
 
-    document.getElementById('canvas').style.display = view
+    element.style.display = view
       ? 'block'
       : 'none';
     document.getElementById('controls').style.display = view

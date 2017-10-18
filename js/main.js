@@ -10,15 +10,24 @@ function repo_init(){
             }
         },
       },
+      'info-events': {
+        'dimensions': {
+          'todo': function(){
+              setup_dimensions();
+          },
+        },
+        'fill': {
+          'todo': fill,
+        },
+        'grid-toggle': {
+          'todo': grid_toggle,
+        },
+        'switch-button': {
+          'todo': switch_view,
+        },
+      },
       'title': 'PixelEditor.htm',
     });
-
-    document.getElementById('dimensions').onclick = function(e){
-        setup_dimensions();
-    }
-    document.getElementById('fill').onclick = fill;
-    document.getElementById('grid-toggle').onclick = grid_toggle;
-    document.getElementById('switch-button').onclick = switch_view;
 
     setup_dimensions(true);
 }

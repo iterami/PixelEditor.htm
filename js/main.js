@@ -10,6 +10,11 @@ function repo_init(){
             }
         },
       },
+      'globals': {
+        'pixelcount': 0,
+        'view': false,
+        'warn_beforeunload': false,
+      },
       'info-events': {
         'dimensions': {
           'todo': function(){

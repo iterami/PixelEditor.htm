@@ -138,7 +138,3 @@ function update_pixel(pixel){
 
     pixel.style.background = document.getElementById('color').value;
 }
-
-var pixelcount = 0;
-var view = false;
-var warn_beforeunload = false;

@@ -10,26 +10,26 @@ function repo_init(){
             }
         },
       },
-      'globals': {
-        'pixelcount': 0,
-        'view': false,
-        'warn_beforeunload': false,
-      },
-      'info-events': {
+      'events': {
         'dimensions': {
-          'todo': function(){
+          'onclick': function(){
               setup_dimensions();
           },
         },
         'fill': {
-          'todo': fill,
+          'onclick': fill,
         },
         'grid-toggle': {
-          'todo': grid_toggle,
+          'onclick': grid_toggle,
         },
         'switch-button': {
-          'todo': switch_view,
+          'onclick': switch_view,
         },
+      },
+      'globals': {
+        'pixelcount': 0,
+        'view': false,
+        'warn_beforeunload': false,
       },
       'title': 'PixelEditor.htm',
     });

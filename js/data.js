@@ -30,8 +30,18 @@ function hover_pixel(pixel){
     );
 
     document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
-    document.getElementById('x').innerHTML = dimensions - pixel.id % dimensions;
-    document.getElementById('y').innerHTML = dimensions - Math.floor(pixel.id / dimensions);
+
+    var x = dimensions - pixel.id % dimensions;
+    if(x < 10){
+        x = '0' + x;
+    }
+    document.getElementById('x').innerHTML = x;
+
+    var y = dimensions - Math.floor(pixel.id / dimensions);
+    if(y < 10){
+        y = '0' + y;
+    }
+    document.getElementById('y').innerHTML = y;
 }
 
 function setup_dimensions(skip){

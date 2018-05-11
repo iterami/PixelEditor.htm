@@ -147,4 +147,5 @@ function update_pixel(pixel){
     warn_beforeunload = true;
 
     pixel.style.background = document.getElementById('color').value;
+    document.getElementById('color-hover').value = pixel.style.backgroundColor;
 }

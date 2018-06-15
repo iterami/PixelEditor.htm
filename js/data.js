@@ -127,9 +127,13 @@ function switch_view(){
                 row_counter -= 1;
             }
         }while(loop_counter--);
+
+        document.getElementById('uri').innerHTML = core_uri({
+          'id': 'canvas',
+        });
     }
 
-    element.style.display = view
+    document.getElementById('view').style.display = view
       ? 'block'
       : 'none';
     document.getElementById('controls').style.display = view

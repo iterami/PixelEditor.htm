@@ -24,7 +24,7 @@ function grid_toggle(){
 }
 
 function hover_pixel(pixel){
-    var dimensions = parseInt(
+    var dimensions = Number.parseInt(
       document.getElementById('dimensions').value,
       10
     );
@@ -58,7 +58,7 @@ function setup_dimensions(skip){
             return;
         }
 
-        dimensions = parseInt(
+        dimensions = Number.parseInt(
           dimensions,
           10
         );
@@ -94,7 +94,7 @@ function switch_view(){
     var element = document.getElementById('canvas');
 
     if(view){
-        var dimensions = parseInt(
+        var dimensions = Number.parseInt(
           document.getElementById('dimensions').value,
           10
         );
@@ -105,7 +105,7 @@ function switch_view(){
 
         var canvas = element.getContext('2d');
         var loop_counter = Math.pow(dimensions, 2) - 1;
-        var row_counter = parseInt(
+        var row_counter = Number.parseInt(
           document.getElementById('dimensions').value,
           10
         );

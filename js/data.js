@@ -5,7 +5,7 @@ function fill(){
         return;
     }
 
-    var loop_counter = pixelcount - 1;
+    let loop_counter = pixelcount - 1;
     do{
         update_pixel(document.getElementById(loop_counter));
     }while(loop_counter--);
@@ -13,31 +13,31 @@ function fill(){
 
 function grid_toggle(){
     // If buttons don't currently have borders, add borders.
-    var border_width = document.getElementById(0).style.borderWidth != '1px'
+    let border_width = document.getElementById(0).style.borderWidth != '1px'
       ? '1px'
       : 0;
 
-    var loop_counter = pixelcount - 1;
+    let loop_counter = pixelcount - 1;
     do{
         document.getElementById(loop_counter).style.borderWidth = border_width;
     }while(loop_counter--);
 }
 
 function hover_pixel(pixel){
-    var dimensions = Number.parseInt(
+    let dimensions = Number.parseInt(
       document.getElementById('dimensions').value,
       10
     );
 
     document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
 
-    var x = dimensions - pixel.id % dimensions;
+    let x = dimensions - pixel.id % dimensions;
     if(x < 10){
         x = '0' + x;
     }
     document.getElementById('x').innerHTML = x;
 
-    var y = dimensions - Math.floor(pixel.id / dimensions);
+    let y = dimensions - Math.floor(pixel.id / dimensions);
     if(y < 10){
         y = '0' + y;
     }
@@ -45,8 +45,8 @@ function hover_pixel(pixel){
 }
 
 function setup_dimensions(skip){
-    var element = document.getElementById('dimensions');
-    var dimensions = element.value;
+    let element = document.getElementById('dimensions');
+    let dimensions = element.value;
 
     if(!skip){
         dimensions = window.prompt(
@@ -68,8 +68,8 @@ function setup_dimensions(skip){
     pixelcount = Math.pow(dimensions, 2);
 
     // Create pixel divs.
-    var loop_counter = pixelcount - 1;
-    var output = '';
+    let loop_counter = pixelcount - 1;
+    let output = '';
     do{
         output += '<input class=gridbutton id=' + loop_counter
           + ' onclick="update_pixel(this)" onmouseover="hover_pixel(this)" style="border-color:#aaa;border-width:1px;margin:0" type=button>';
@@ -91,10 +91,10 @@ function setup_dimensions(skip){
 
 function switch_view(){
     view = !view;
-    var element = document.getElementById('canvas');
+    let element = document.getElementById('canvas');
 
     if(view){
-        var dimensions = Number.parseInt(
+        let dimensions = Number.parseInt(
           document.getElementById('dimensions').value,
           10
         );
@@ -103,9 +103,9 @@ function switch_view(){
         element.height = dimensions;
         element.width = dimensions;
 
-        var canvas = element.getContext('2d');
-        var loop_counter = Math.pow(dimensions, 2) - 1;
-        var row_counter = Number.parseInt(
+        let canvas = element.getContext('2d');
+        let loop_counter = Math.pow(dimensions, 2) - 1;
+        let row_counter = Number.parseInt(
           document.getElementById('dimensions').value,
           10
         );

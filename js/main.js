@@ -22,15 +22,16 @@ function repo_init(){
         'grid-toggle': {
           'onclick': grid_toggle,
         },
-        'switch-button': {
-          'onclick': switch_view,
-        },
       },
       'globals': {
         'pixelcount': 0,
         'view': false,
         'warn_beforeunload': false,
       },
+      'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas>'
+        + '<hr><input id=color type=color value=#ffffff><input id=fill type=button value=Fill><input id=grid-toggle type=button value=Grid><input id=dimensions type=button value=25>'
+        + ' <span id=x></span> <span id=y></span> <input id=color-hover readonly>',
+      'menu': true,
       'title': 'PixelEditor.htm',
     });
 

@@ -9,6 +9,8 @@ function fill(){
     do{
         update_pixel(document.getElementById(loop_counter));
     }while(loop_counter--);
+
+    update_result();
 }
 
 function grid_toggle(){
@@ -72,7 +74,7 @@ function setup_dimensions(skip){
     let output = '';
     do{
         output += '<input class=gridbutton id=' + loop_counter
-          + ' onclick="update_pixel(this)" onmouseover="hover_pixel(this)" style="border-color:#aaa;border-width:1px;margin:0" type=button>';
+          + ' onclick="update_pixel(this, true)" onmouseover="hover_pixel(this)" style="border-color:#aaa;border-width:1px;margin:0" type=button>';
 
         if(loop_counter % dimensions === 0){
             output += '<br>';
@@ -87,69 +89,58 @@ function setup_dimensions(skip){
     document.getElementById(0).style.borderWidth = '1px';
 
     warn_beforeunload = false;
+
+    update_result();
 }
 
-function switch_view(){
-    view = !view;
-    let element = document.getElementById('canvas');
-
-    if(view){
-        let dimensions = Number.parseInt(
-          document.getElementById('dimensions').value,
-          10
-        );
-
-        // Paint canvas pixels based on colors of divs.
-        element.height = dimensions;
-        element.width = dimensions;
-
-        let canvas = element.getContext('2d');
-        let loop_counter = Math.pow(dimensions, 2) - 1;
-        let row_counter = Number.parseInt(
-          document.getElementById('dimensions').value,
-          10
-        );
-        do{
-            // Draw each pixel on the canvas based on div background colors.
-            canvas.fillStyle = document.getElementById(loop_counter).style.backgroundColor;
-            canvas.fillRect(
-              row_counter * dimensions - loop_counter - 1,
-              dimensions - row_counter,
-              1,
-              1
-            );
-
-            // Reset background color to black.
-            canvas.fillStyle = '#000';
-
-            // Only dimensions pixels per row.
-            if(loop_counter % dimensions === 0){
-                row_counter -= 1;
-            }
-        }while(loop_counter--);
-
-        document.getElementById('uri').innerHTML = core_uri({
-          'id': 'canvas',
-        });
-    }
-
-    document.getElementById('view').style.display = view
-      ? 'block'
-      : 'none';
-    document.getElementById('controls').style.display = view
-      ? 'none'
-      : 'inline-block';
-    document.getElementById('edit').style.display = view
-      ? 'none'
-      : 'block';
-    document.getElementById('switch-button').value = view
-      ? 'Edit'
-      : 'View';
-}
-
-function update_pixel(pixel){
+function update_pixel(pixel, result){
     warn_beforeunload = true;
 
     pixel.style.background = document.getElementById('color').value;
     document.getElementById('color-hover').value = pixel.style.backgroundColor;
+
+    if(result === true){
+        update_result();
+    }
+}
+
+function update_result(){
+    let dimensions = Number.parseInt(
+      document.getElementById('dimensions').value,
+      10
+    );
+
+    // Paint canvas pixels based on colors of divs.
+    let canvas_element = document.getElementById('canvas');
+    canvas_element.height = dimensions;
+    canvas_element.width = dimensions;
+
+    let canvas = canvas_element.getContext('2d');
+    let loop_counter = Math.pow(dimensions, 2) - 1;
+    let row_counter = Number.parseInt(
+      document.getElementById('dimensions').value,
+      10
+    );
+    do{
+        // Draw each pixel on the canvas based on div background colors.
+        canvas.fillStyle = document.getElementById(loop_counter).style.backgroundColor;
+        canvas.fillRect(
+          row_counter * dimensions - loop_counter - 1,
+          dimensions - row_counter,
+          1,
+          1
+        );
+
+        // Reset background color to black.
+        canvas.fillStyle = '#000';
+
+        // Only dimensions pixels per row.
+        if(loop_counter % dimensions === 0){
+            row_counter -= 1;
+        }
+    }while(loop_counter--);
+
+    document.getElementById('uri').innerHTML = core_uri({
+      'id': 'canvas',
+    });
 }

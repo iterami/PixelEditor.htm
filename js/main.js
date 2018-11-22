@@ -11,13 +11,18 @@ function repo_init(){
         },
       },
       'events': {
-        'dimensions': {
-          'onclick': function(){
-              setup_dimensions();
-          },
-        },
         'fill': {
           'onclick': fill,
+        },
+        'grid-remake': {
+          'onclick': function(){
+              if(!window.confirm('Remake grid?')){
+                  return;
+              }
+
+              core_storage_save();
+              setup_dimensions();
+          },
         },
         'grid-toggle': {
           'onclick': grid_toggle,
@@ -29,11 +34,16 @@ function repo_init(){
         'warn_beforeunload': false,
       },
       'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas>'
-        + '<hr><input id=color type=color value=#ffffff><input id=fill type=button value=Fill><input id=grid-toggle type=button value=Grid><input id=dimensions type=button value=25>'
+        + '<hr><input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Grid"><br>'
+        + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
         + ' <span id=x></span> <span id=y></span> <input id=color-hover readonly>',
       'menu': true,
+      'storage': {
+        'grid-dimensions': 32,
+      },
+      'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions</table>',
       'title': 'PixelEditor.htm',
     });
 
-    setup_dimensions(true);
+    setup_dimensions();
 }

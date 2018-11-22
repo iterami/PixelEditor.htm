@@ -46,4 +46,5 @@ function repo_init(){
     });
 
     setup_dimensions();
+    document.getElementById('edit').style.userSelect = 'none';
 }

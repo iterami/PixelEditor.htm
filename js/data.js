@@ -39,6 +39,13 @@ function hover_pixel(pixel){
         y = '0' + y;
     }
     document.getElementById('y').innerHTML = y;
+
+    if(core_mouse['down-0']){
+        update_pixel(
+          pixel,
+          true
+        );
+    }
 }
 
 function setup_dimensions(){

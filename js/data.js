@@ -120,7 +120,9 @@ function update_result(){
         }
     }while(loop_counter--);
 
-    document.getElementById('uri').innerHTML = core_uri({
+    let uri = core_uri({
       'id': 'canvas',
     });
+    document.getElementById('uri').innerHTML = uri;
+    document.getElementById('uri-length').innerHTML = uri.length;
 }

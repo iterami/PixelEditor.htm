@@ -33,7 +33,7 @@ function repo_init(){
         'view': false,
         'warn_beforeunload': false,
       },
-      'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas>'
+      'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas> <span id=uri-length></span>'
         + '<hr><input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Grid"><br>'
         + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
         + ' <span id=x></span> <span id=y></span> <input id=color-hover readonly>',

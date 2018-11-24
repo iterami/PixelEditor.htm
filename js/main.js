@@ -38,6 +38,7 @@ function repo_init(){
         + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
         + ' <span id=x></span> <span id=y></span> <input id=color-hover readonly>',
       'menu': true,
+      'menu-block-events': false,
       'storage': {
         'grid-dimensions': 32,
       },

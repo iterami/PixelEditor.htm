@@ -25,6 +25,10 @@ function grid_toggle(){
     }while(loop_counter--);
 }
 
+function hexvalues(i){
+    return '0123456789abcdef'.charAt(i);
+}
+
 function hover_pixel(pixel){
     document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
 
@@ -123,6 +127,52 @@ function update_result(){
     let uri = core_uri({
       'id': 'canvas',
     });
-    document.getElementById('uri').innerHTML = uri;
+    document.getElementById('uri').value = uri;
     document.getElementById('uri-length').innerHTML = uri.length;
+}
+
+function uri_to_grid(){
+    if(!window.confirm('Set grid to URI?')){
+        return;
+    }
+
+    core_image({
+      'id': 'uri',
+      'src': document.getElementById('uri').value,
+      'todo': function(){
+          let canvas = document.getElementById('canvas').getContext('2d');
+
+          canvas.drawImage(
+            core_images['uri'],
+            0,
+            0
+          );
+
+          delete core_images['uri'];
+
+          let loop_counter = Math.pow(
+            core_storage_data['grid-dimensions'],
+            2
+          ) - 1;
+          let row_counter = core_storage_data['grid-dimensions'];
+          do{
+              let pixel = canvas.getImageData(
+                row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
+                core_storage_data['grid-dimensions'] - row_counter,
+                1,
+                1
+              );
+
+              document.getElementById(loop_counter).style.backgroundColor = '#'
+                + hexvalues((pixel['data'][0] - pixel['data'][0] % 16) / 16) + hexvalues(pixel['data'][0] % 16)
+                + hexvalues((pixel['data'][1] - pixel['data'][1] % 16) / 16) + hexvalues(pixel['data'][1] % 16)
+                + hexvalues((pixel['data'][2] - pixel['data'][2] % 16) / 16) + hexvalues(pixel['data'][2] % 16);
+
+              // Only grid-dimensions pixels per row.
+              if(loop_counter % core_storage_data['grid-dimensions'] === 0){
+                  row_counter -= 1;
+              }
+          }while(loop_counter--);
+      },
+    });
 }

@@ -27,14 +27,17 @@ function repo_init(){
         'grid-toggle': {
           'onclick': grid_toggle,
         },
+        'uri-to-grid': {
+          'onclick': uri_to_grid,
+        },
       },
       'globals': {
         'pixelcount': 0,
         'view': false,
         'warn_beforeunload': false,
       },
-      'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas> <span id=uri-length></span>'
-        + '<hr><input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><br>'
+      'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas> <span id=uri-length></span><hr>'
+        + '<input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><input id=uri-to-grid type=button value="Set Grid to URI"><br>'
         + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
         + ' <span id=x></span> <span id=y></span> <input id=color-hover readonly>',
       'menu': true,

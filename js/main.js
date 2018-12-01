@@ -2,12 +2,6 @@
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': {
-        'todo': function(){
-            // Ask for permission to close if any pixels have been changed.
-            return 'Save feature not yet implemented.';
-        },
-      },
       'events': {
         'fill': {
           'onclick': fill,
@@ -47,6 +41,7 @@ function repo_init(){
       'menu-block-events': false,
       'storage': {
         'grid-dimensions': 32,
+        'uri': '',
       },
       'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions</table>',
       'title': 'PixelEditor.htm',

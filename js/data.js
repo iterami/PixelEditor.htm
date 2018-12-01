@@ -77,14 +77,11 @@ function setup_dimensions(){
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 
-    warn_beforeunload = false;
-
+    uri_to_grid();
     update_result();
 }
 
 function update_pixel(pixel, result){
-    warn_beforeunload = true;
-
     pixel.style.background = document.getElementById('color').value;
     document.getElementById('color-hover').value = pixel.style.backgroundColor;
 
@@ -132,10 +129,6 @@ function update_result(){
 }
 
 function uri_to_grid(){
-    if(!window.confirm('Set grid to URI?')){
-        return;
-    }
-
     core_image({
       'id': 'uri',
       'src': document.getElementById('uri').value,
@@ -173,6 +166,8 @@ function uri_to_grid(){
                   row_counter -= 1;
               }
           }while(loop_counter--);
+
+          update_result();
       },
     });
 }

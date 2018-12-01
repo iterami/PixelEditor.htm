@@ -5,9 +5,7 @@ function repo_init(){
       'beforeunload': {
         'todo': function(){
             // Ask for permission to close if any pixels have been changed.
-            if(warn_beforeunload){
-                return 'Save feature not yet implemented.';
-            }
+            return 'Save feature not yet implemented.';
         },
       },
       'events': {
@@ -28,13 +26,18 @@ function repo_init(){
           'onclick': grid_toggle,
         },
         'uri-to-grid': {
-          'onclick': uri_to_grid,
+          'onclick': function(){
+              if(!window.confirm('Set grid to URI?')){
+                  return;
+              }
+
+              uri_to_grid();
+          },
         },
       },
       'globals': {
         'pixelcount': 0,
         'view': false,
-        'warn_beforeunload': false,
       },
       'info': '<textarea id=uri></textarea><br><canvas id=canvas></canvas> <span id=uri-length></span><hr>'
         + '<input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><input id=uri-to-grid type=button value="Set Grid to URI"><br>'

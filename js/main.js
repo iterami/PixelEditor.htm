@@ -41,7 +41,7 @@ function repo_init(){
       'menu-block-events': false,
       'storage': {
         'grid-dimensions': 32,
-        'size': 25,
+        'size': '25px',
         'uri': '',
       },
       'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions'

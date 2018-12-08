@@ -81,11 +81,11 @@ function setup_dimensions(){
 
         element.style.borderColor = '#aaa';
         element.style.borderWidth = '1px';
-        element.style.height = core_storage_data['size'] + 'px';
+        element.style.height = core_storage_data['size'];
         element.style.margin = 0;
         element.style.setProperty(
           'width',
-          core_storage_data['size'] + 'px',
+          core_storage_data['size'],
           'important'
         );
     }while(loop_counter--);

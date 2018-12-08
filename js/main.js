@@ -41,9 +41,11 @@ function repo_init(){
       'menu-block-events': false,
       'storage': {
         'grid-dimensions': 32,
+        'size': 25,
         'uri': '',
       },
-      'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions</table>',
+      'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions'
+        + '<tr><td><input id=size><td>Size</table>',
       'title': 'PixelEditor.htm',
     });
 

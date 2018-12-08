@@ -63,7 +63,7 @@ function setup_dimensions(){
     let output = '';
     do{
         output += '<input class=gridbutton id=' + loop_counter
-          + ' onclick="update_pixel(this, true)" onmouseover="hover_pixel(this)" style="border-color:#aaa;border-width:1px;margin:0" type=button>';
+          + ' onclick="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button>';
 
         if(loop_counter % core_storage_data['grid-dimensions'] === 0){
             output += '<br>';
@@ -73,6 +73,22 @@ function setup_dimensions(){
     let element = document.getElementById('edit');
     element.innerHTML = output;
     element.style.minWidth = (core_storage_data['grid-dimensions'] * 22) + 'px';
+
+    // Add button CSS.
+    loop_counter = pixelcount - 1;
+    do{
+        let element = document.getElementById(loop_counter);
+
+        element.style.borderColor = '#aaa';
+        element.style.borderWidth = '1px';
+        element.style.height = core_storage_data['size'] + 'px';
+        element.style.margin = 0;
+        element.style.setProperty(
+          'width',
+          core_storage_data['size'] + 'px',
+          'important'
+        );
+    }while(loop_counter--);
 
     // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';

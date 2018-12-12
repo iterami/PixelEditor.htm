@@ -169,6 +169,8 @@ function update_result(){
 }
 
 function uri_to_grid(){
+    core_storage_save();
+
     if(core_storage_data['uri'].length === 0){
         update_result();
         return;
@@ -176,7 +178,7 @@ function uri_to_grid(){
 
     core_image({
       'id': 'uri',
-      'src': document.getElementById('uri').value,
+      'src': core_storage_data['uri'],
       'todo': function(){
           let canvas = document.getElementById('canvas').getContext('2d');
 

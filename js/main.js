@@ -41,12 +41,12 @@ function repo_init(){
       'menu-block-events': false,
       'storage': {
         'grid-dimensions': 32,
-        'size': '25px',
+        'size': 25,
         'transparent': false,
         'uri': '',
       },
       'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions'
-        + '<tr><td><input id=size><td>Size'
+        + '<tr><td><input id=size><td>px Size'
         + '<tr><td><input id=transparent type=checkbox><td>Transparency Mode</table>',
       'title': 'PixelEditor.htm',
     });

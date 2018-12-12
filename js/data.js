@@ -78,7 +78,7 @@ function setup_dimensions(){
 
     let element = document.getElementById('edit');
     element.innerHTML = output;
-    element.style.minWidth = (core_storage_data['grid-dimensions'] * 22) + 'px';
+    element.style.minWidth = (core_storage_data['grid-dimensions'] * core_storage_data['size']) + 'px';
 
     // Add button CSS.
     loop_counter = pixelcount - 1;
@@ -87,11 +87,11 @@ function setup_dimensions(){
 
         element.style.borderColor = '#aaa';
         element.style.borderWidth = '1px';
-        element.style.height = core_storage_data['size'];
+        element.style.height = core_storage_data['size'] + 'px';
         element.style.margin = 0;
         element.style.setProperty(
           'width',
-          core_storage_data['size'],
+          core_storage_data['size'] + 'px',
           'important'
         );
     }while(loop_counter--);

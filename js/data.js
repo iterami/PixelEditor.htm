@@ -1,7 +1,11 @@
 'use strict';
 
 function fill(){
-    if(!window.confirm('Set every pixel to ' + document.getElementById('color').value + '?')){
+    let type = core_storage_data['transparent']
+      ? 'transparent'
+      : document.getElementById('color').value;
+
+    if(!window.confirm('Set every pixel to ' + type + '?')){
         return;
     }
 
@@ -30,7 +34,9 @@ function hexvalues(i){
 }
 
 function hover_pixel(pixel){
-    document.getElementById('color-hover').value = pixel.style.backgroundColor || 'rgb(0, 0, 0)';
+    document.getElementById('color-hover').value = pixel.value === 'T'
+      ? 'transparent'
+      : (pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
     let x = core_storage_data['grid-dimensions'] - pixel.id % core_storage_data['grid-dimensions'];
     if(x < 10){
@@ -94,12 +100,19 @@ function setup_dimensions(){
     document.getElementById(0).style.borderWidth = '1px';
 
     uri_to_grid();
-    update_result();
 }
 
 function update_pixel(pixel, result){
-    pixel.style.background = document.getElementById('color').value;
-    document.getElementById('color-hover').value = pixel.style.backgroundColor;
+    if(core_storage_data['transparent']){
+        pixel.style.background = '#000';
+        pixel.value = 'T';
+        document.getElementById('color-hover').value = 'transparent';
+
+    }else{
+        pixel.style.background = document.getElementById('color').value;
+        pixel.value = '';
+        document.getElementById('color-hover').value = pixel.style.backgroundColor;
+    }
 
     if(result === true){
         update_result();
@@ -113,14 +126,25 @@ function update_result(){
     canvas_element.width = core_storage_data['grid-dimensions'];
 
     let canvas = canvas_element.getContext('2d');
+    canvas.clearRect(
+      0,
+      0,
+      canvas_element.width,
+      canvas_element.height
+    );
+
     let loop_counter = Math.pow(
       core_storage_data['grid-dimensions'],
       2
     ) - 1;
     let row_counter = core_storage_data['grid-dimensions'];
     do{
-        // Draw each pixel on the canvas based on div background colors.
-        canvas.fillStyle = document.getElementById(loop_counter).style.backgroundColor;
+        let element = document.getElementById(loop_counter);
+
+        canvas.fillStyle = element.value === 'T'
+          ? 'rgba(0,0,0,0)'
+          : element.style.backgroundColor;
+
         canvas.fillRect(
           row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
           core_storage_data['grid-dimensions'] - row_counter,
@@ -145,12 +169,23 @@ function update_result(){
 }
 
 function uri_to_grid(){
+    if(core_storage_data['uri'].length === 0){
+        update_result();
+        return;
+    }
+
     core_image({
       'id': 'uri',
       'src': document.getElementById('uri').value,
       'todo': function(){
           let canvas = document.getElementById('canvas').getContext('2d');
 
+          canvas.clearRect(
+            0,
+            0,
+            core_storage_data['grid-dimensions'],
+            core_storage_data['grid-dimensions']
+          );
           canvas.drawImage(
             core_images['uri'],
             0,
@@ -171,11 +206,18 @@ function uri_to_grid(){
                 1,
                 1
               );
+              let element = document.getElementById(loop_counter);
 
-              document.getElementById(loop_counter).style.backgroundColor = '#'
-                + hexvalues((pixel['data'][0] - pixel['data'][0] % 16) / 16) + hexvalues(pixel['data'][0] % 16)
-                + hexvalues((pixel['data'][1] - pixel['data'][1] % 16) / 16) + hexvalues(pixel['data'][1] % 16)
-                + hexvalues((pixel['data'][2] - pixel['data'][2] % 16) / 16) + hexvalues(pixel['data'][2] % 16);
+              if(pixel['data'][3] > 0){
+                  element.style.backgroundColor = '#'
+                    + hexvalues((pixel['data'][0] - pixel['data'][0] % 16) / 16) + hexvalues(pixel['data'][0] % 16)
+                    + hexvalues((pixel['data'][1] - pixel['data'][1] % 16) / 16) + hexvalues(pixel['data'][1] % 16)
+                    + hexvalues((pixel['data'][2] - pixel['data'][2] % 16) / 16) + hexvalues(pixel['data'][2] % 16);
+                  element.value = '';
+
+              }else{
+                  element.value = 'T';
+              }
 
               // Only grid-dimensions pixels per row.
               if(loop_counter % core_storage_data['grid-dimensions'] === 0){

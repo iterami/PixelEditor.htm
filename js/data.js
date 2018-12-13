@@ -141,19 +141,20 @@ function update_result(){
     do{
         let element = document.getElementById(loop_counter);
 
-        canvas.fillStyle = element.value === 'T'
-          ? 'rgba(0,0,0,0)'
-          : element.style.backgroundColor;
+        // Only draw pixels that aren't transparent.
+        if(element.value !== 'T'){
+            canvas.fillStyle = element.style.backgroundColor;
 
-        canvas.fillRect(
-          row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
-          core_storage_data['grid-dimensions'] - row_counter,
-          1,
-          1
-        );
+            canvas.fillRect(
+              row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
+              core_storage_data['grid-dimensions'] - row_counter,
+              1,
+              1
+            );
 
-        // Reset background color to black.
-        canvas.fillStyle = '#000';
+            // Reset background color to black.
+            canvas.fillStyle = '#000';
+        }
 
         // Only grid-dimensions pixels per row.
         if(loop_counter % core_storage_data['grid-dimensions'] === 0){

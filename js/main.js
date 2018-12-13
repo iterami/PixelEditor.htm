@@ -25,6 +25,7 @@ function repo_init(){
                   return;
               }
 
+              core_storage_save();
               uri_to_grid();
           },
         },

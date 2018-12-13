@@ -169,8 +169,6 @@ function update_result(){
 }
 
 function uri_to_grid(){
-    core_storage_save();
-
     if(core_storage_data['uri'].length === 0){
         update_result();
         return;

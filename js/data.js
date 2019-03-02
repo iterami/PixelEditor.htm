@@ -69,7 +69,7 @@ function setup_dimensions(){
     let output = '';
     do{
         output += '<input class=gridbutton id=' + loop_counter
-          + ' onclick="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button>';
+          + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button>';
 
         if(loop_counter % core_storage_data['grid-dimensions'] === 0){
             output += '<br>';
@@ -113,6 +113,8 @@ function update_pixel(pixel, result){
     if(result === true){
         update_result();
     }
+
+    core_mouse['down-0'] = true;
 }
 
 function update_result(){

@@ -89,11 +89,7 @@ function setup_dimensions(){
         element.style.borderWidth = '1px';
         element.style.height = core_storage_data['size'] + 'px';
         element.style.margin = 0;
-        element.style.setProperty(
-          'width',
-          core_storage_data['size'] + 'px',
-          'important'
-        );
+        element.style.width = core_storage_data['size'] + 'px';
     }while(loop_counter--);
 
     // Set borderWidth of first button to use as grid toggle.

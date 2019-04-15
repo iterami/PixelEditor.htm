@@ -162,6 +162,8 @@ function update_result(){
 
     let uri = core_uri({
       'id': 'canvas',
+      'quality': core_storage_data['quality'],
+      'type': core_storage_data['type'],
     });
     document.getElementById('uri').value = uri;
     document.getElementById('uri-length').innerHTML = uri.length;

@@ -1,7 +1,7 @@
 'use strict';
 
 function fill(){
-    let type = core_storage_data['transparent']
+    let type = core_storage_data['mode'] === 2
       ? 'transparent'
       : document.getElementById('color').value;
 
@@ -36,7 +36,7 @@ function hexvalues(i){
 function hover_pixel(pixel){
     document.getElementById('color-hover').value = pixel.value === 'T'
       ? 'transparent'
-      : (pixel.style.backgroundColor || 'rgb(0, 0, 0)');
+      : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
     let x = core_storage_data['grid-dimensions'] - pixel.id % core_storage_data['grid-dimensions'];
     if(x < 10){
@@ -56,6 +56,18 @@ function hover_pixel(pixel){
           true
         );
     }
+}
+
+function rgb_to_hex(rgb){
+    rgb = rgb.slice(4);
+
+    let red = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
+    rgb = rgb.substring(rgb.indexOf(',') + 2);
+    let green = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
+    rgb = rgb.substring(rgb.indexOf(',') + 2);
+    let blue = '0' + Number(rgb.substring(0, rgb.indexOf(')'))).toString(16);
+
+    return '#' + red.slice(-2) + green.slice(-2) + blue.slice(-2);
 }
 
 function setup_dimensions(){
@@ -99,11 +111,19 @@ function setup_dimensions(){
 }
 
 function update_pixel(pixel, result){
-    if(core_storage_data['transparent']){
+    core_storage_save();
+
+    // Color picking mode.
+    if(core_storage_data['mode'] === 1){
+        document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);
+
+    // Transparency mode.
+    }else if(core_storage_data['mode'] === 2){
         pixel.style.background = '#000';
         pixel.value = 'T';
         document.getElementById('color-hover').value = 'transparent';
 
+    // Set pixel color mode.
     }else{
         pixel.style.background = document.getElementById('color').value;
         pixel.value = '';

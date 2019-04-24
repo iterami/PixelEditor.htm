@@ -127,7 +127,7 @@ function update_pixel(pixel, result){
     }else{
         pixel.style.background = document.getElementById('color').value;
         pixel.value = '';
-        document.getElementById('color-hover').value = pixel.style.backgroundColor;
+        document.getElementById('color-hover').value = rgb_to_hex(pixel.style.backgroundColor);
     }
 
     if(result === true){

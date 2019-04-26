@@ -57,18 +57,20 @@ function repo_init(){
       'menu': true,
       'menu-block-events': false,
       'storage': {
-        'grid-dimensions': 32,
+        'height': 32,
         'mode': 0,
         'quality': 1,
         'size': 25,
         'type': 'image/png',
         'uri': '',
+        'width': 32,
       },
-      'storage-menu': '<table><tr><td><input id=grid-dimensions><td>Grid Dimensions'
+      'storage-menu': '<table><tr><td><input id=height><td>Height'
         + '<tr><td><select id=mode><option value=1>Color Picking</option><option value=0>Set Pixel Color</option><option value=2>Transparency</option></select><td>Mode'
         + '<tr><td><input id=quality><td>Quality'
         + '<tr><td><input id=size><td>px Size'
-        + '<tr><td><input id=type><td>Type</table>',
+        + '<tr><td><input id=type><td>Type'
+        + '<tr><td><input id=width><td>Width</table>',
       'title': 'PixelEditor.htm',
     });
 

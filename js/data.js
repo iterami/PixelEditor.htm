@@ -38,13 +38,13 @@ function hover_pixel(pixel){
       ? 'transparent'
       : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
-    let x = core_storage_data['grid-dimensions'] - pixel.id % core_storage_data['grid-dimensions'];
+    let x = core_storage_data['width'] - pixel.id % core_storage_data['width'];
     if(x < 10){
         x = '0' + x;
     }
     document.getElementById('x').innerHTML = x;
 
-    let y = core_storage_data['grid-dimensions'] - Math.floor(pixel.id / core_storage_data['grid-dimensions']);
+    let y = core_storage_data['height'] - Math.floor(pixel.id / core_storage_data['width']);
     if(y < 10){
         y = '0' + y;
     }
@@ -71,10 +71,7 @@ function rgb_to_hex(rgb){
 }
 
 function setup_dimensions(){
-    pixelcount = Math.pow(
-      core_storage_data['grid-dimensions'],
-      2
-    );
+    pixelcount = core_storage_data['height'] * core_storage_data['width'];
 
     // Create pixel divs.
     let loop_counter = pixelcount - 1;
@@ -83,14 +80,14 @@ function setup_dimensions(){
         output += '<input class=gridbutton id=' + loop_counter
           + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button>';
 
-        if(loop_counter % core_storage_data['grid-dimensions'] === 0){
+        if(loop_counter % core_storage_data['width'] === 0){
             output += '<br>';
         }
     }while(loop_counter--);
 
     let element = document.getElementById('edit');
     element.innerHTML = output;
-    element.style.minWidth = (core_storage_data['grid-dimensions'] * core_storage_data['size']) + 'px';
+    element.style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
 
     // Add button CSS.
     loop_counter = pixelcount - 1;
@@ -140,8 +137,8 @@ function update_pixel(pixel, result){
 function update_result(){
     // Paint canvas pixels based on colors of divs.
     let canvas_element = document.getElementById('canvas');
-    canvas_element.height = core_storage_data['grid-dimensions'];
-    canvas_element.width = core_storage_data['grid-dimensions'];
+    canvas_element.height = core_storage_data['height'];
+    canvas_element.width = core_storage_data['width'];
 
     let canvas = canvas_element.getContext('2d');
     canvas.clearRect(
@@ -151,11 +148,8 @@ function update_result(){
       canvas_element.height
     );
 
-    let loop_counter = Math.pow(
-      core_storage_data['grid-dimensions'],
-      2
-    ) - 1;
-    let row_counter = core_storage_data['grid-dimensions'];
+    let loop_counter = pixelcount - 1;
+    let row_counter = core_storage_data['height'];
     do{
         let element = document.getElementById(loop_counter);
 
@@ -164,8 +158,8 @@ function update_result(){
             canvas.fillStyle = element.style.backgroundColor;
 
             canvas.fillRect(
-              row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
-              core_storage_data['grid-dimensions'] - row_counter,
+              row_counter * core_storage_data['width'] - loop_counter - 1,
+              core_storage_data['height'] - row_counter,
               1,
               1
             );
@@ -174,8 +168,8 @@ function update_result(){
             canvas.fillStyle = '#000';
         }
 
-        // Only grid-dimensions pixels per row.
-        if(loop_counter % core_storage_data['grid-dimensions'] === 0){
+        // Only width pixels per row.
+        if(loop_counter % core_storage_data['width'] === 0){
             row_counter -= 1;
         }
     }while(loop_counter--);
@@ -204,8 +198,8 @@ function uri_to_grid(){
           canvas.clearRect(
             0,
             0,
-            core_storage_data['grid-dimensions'],
-            core_storage_data['grid-dimensions']
+            core_storage_data['width'],
+            core_storage_data['height']
           );
           canvas.drawImage(
             core_images['uri'],
@@ -215,15 +209,12 @@ function uri_to_grid(){
 
           delete core_images['uri'];
 
-          let loop_counter = Math.pow(
-            core_storage_data['grid-dimensions'],
-            2
-          ) - 1;
-          let row_counter = core_storage_data['grid-dimensions'];
+          let loop_counter = pixelcount - 1;
+          let row_counter = core_storage_data['height'];
           do{
               let pixel = canvas.getImageData(
-                row_counter * core_storage_data['grid-dimensions'] - loop_counter - 1,
-                core_storage_data['grid-dimensions'] - row_counter,
+                row_counter * core_storage_data['width'] - loop_counter - 1,
+                core_storage_data['height'] - row_counter,
                 1,
                 1
               );
@@ -240,8 +231,8 @@ function uri_to_grid(){
                   element.value = 'T';
               }
 
-              // Only grid-dimensions pixels per row.
-              if(loop_counter % core_storage_data['grid-dimensions'] === 0){
+              // Only width pixels per row.
+              if(loop_counter % core_storage_data['width'] === 0){
                   row_counter -= 1;
               }
           }while(loop_counter--);

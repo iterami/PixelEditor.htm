@@ -19,7 +19,7 @@ function fill(){
 
 function grid_toggle(){
     // If buttons don't currently have borders, add borders.
-    let border_width = document.getElementById(0).style.borderWidth != '1px'
+    let border_width = document.getElementById(0).style.borderWidth !== '1px'
       ? '1px'
       : 0;
 

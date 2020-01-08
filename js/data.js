@@ -38,17 +38,12 @@ function hover_pixel(pixel){
       ? 'transparent'
       : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
-    let x = core_storage_data['width'] - pixel.id % core_storage_data['width'];
-    if(x < 10){
-        x = '0' + x;
-    }
-    document.getElementById('x').innerHTML = x;
-
-    let y = core_storage_data['height'] - Math.floor(pixel.id / core_storage_data['width']);
-    if(y < 10){
-        y = '0' + y;
-    }
-    document.getElementById('y').innerHTML = y;
+    document.getElementById('x').textContent = core_digits_min({
+      'number': core_storage_data['width'] - pixel.id % core_storage_data['width'],
+    });
+    document.getElementById('y').textContent = core_digits_min({
+      'number': core_storage_data['height'] - Math.floor(pixel.id / core_storage_data['width']),
+    });
 
     if(core_mouse['down-0']){
         update_pixel(

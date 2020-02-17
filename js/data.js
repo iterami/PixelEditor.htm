@@ -1,7 +1,7 @@
 'use strict';
 
 function fill(){
-    let type = core_storage_data['mode'] === 2
+    const type = core_storage_data['mode'] === 2
       ? 'transparent'
       : document.getElementById('color').value;
 
@@ -19,7 +19,7 @@ function fill(){
 
 function grid_toggle(){
     // If buttons don't currently have borders, add borders.
-    let border_width = document.getElementById(0).style.borderWidth !== '1px'
+    const border_width = document.getElementById(0).style.borderWidth !== '1px'
       ? '1px'
       : 0;
 
@@ -56,11 +56,11 @@ function hover_pixel(pixel){
 function rgb_to_hex(rgb){
     rgb = rgb.slice(4);
 
-    let red = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
+    const red = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
     rgb = rgb.substring(rgb.indexOf(',') + 2);
-    let green = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
+    const green = '0' + Number(rgb.substring(0, rgb.indexOf(','))).toString(16);
     rgb = rgb.substring(rgb.indexOf(',') + 2);
-    let blue = '0' + Number(rgb.substring(0, rgb.indexOf(')'))).toString(16);
+    const blue = '0' + Number(rgb.substring(0, rgb.indexOf(')'))).toString(16);
 
     return '#' + red.slice(-2) + green.slice(-2) + blue.slice(-2);
 }
@@ -80,14 +80,14 @@ function setup_dimensions(){
         }
     }while(loop_counter--);
 
-    let element = document.getElementById('edit');
+    const element = document.getElementById('edit');
     element.innerHTML = output;
     element.style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
 
     // Add button CSS.
     loop_counter = pixelcount - 1;
     do{
-        let element = document.getElementById(loop_counter);
+        const element = document.getElementById(loop_counter);
 
         element.style.borderColor = '#aaa';
         element.style.borderWidth = '1px';
@@ -131,11 +131,11 @@ function update_pixel(pixel, result){
 
 function update_result(){
     // Paint canvas pixels based on colors of divs.
-    let canvas_element = document.getElementById('canvas');
+    const canvas_element = document.getElementById('canvas');
     canvas_element.height = core_storage_data['height'];
     canvas_element.width = core_storage_data['width'];
 
-    let canvas = canvas_element.getContext('2d');
+    const canvas = canvas_element.getContext('2d');
     canvas.clearRect(
       0,
       0,
@@ -146,7 +146,7 @@ function update_result(){
     let loop_counter = pixelcount - 1;
     let row_counter = core_storage_data['height'];
     do{
-        let element = document.getElementById(loop_counter);
+        const element = document.getElementById(loop_counter);
 
         // Only draw pixels that aren't transparent.
         if(element.value !== 'T'){
@@ -169,7 +169,7 @@ function update_result(){
         }
     }while(loop_counter--);
 
-    let uri = core_uri({
+    const uri = core_uri({
       'id': 'canvas',
       'quality': core_storage_data['quality'],
       'type': core_storage_data['type'],
@@ -188,7 +188,7 @@ function uri_to_grid(){
       'id': 'uri',
       'src': core_storage_data['uri'],
       'todo': function(){
-          let canvas = document.getElementById('canvas').getContext('2d');
+          const canvas = document.getElementById('canvas').getContext('2d');
 
           canvas.clearRect(
             0,
@@ -210,13 +210,13 @@ function uri_to_grid(){
           let loop_counter = pixelcount - 1;
           let row_counter = core_storage_data['height'];
           do{
-              let pixel = canvas.getImageData(
+              const pixel = canvas.getImageData(
                 row_counter * core_storage_data['width'] - loop_counter - 1,
                 core_storage_data['height'] - row_counter,
                 1,
                 1
               );
-              let element = document.getElementById(loop_counter);
+              const element = document.getElementById(loop_counter);
 
               if(pixel['data'][3] > 0){
                   element.style.backgroundColor = '#'

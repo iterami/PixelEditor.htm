@@ -5,7 +5,7 @@ function repo_init(){
       'events': {
         'file-to-uri': {
           'onclick': function(){
-              let files = document.getElementById('file').files;
+              const files = document.getElementById('file').files;
               if(files.length === 0){
                   return;
               }

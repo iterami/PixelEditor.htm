@@ -5,7 +5,7 @@ function fill(){
       ? 'transparent'
       : document.getElementById('color').value;
 
-    if(!window.confirm('Set every pixel to ' + type + '?')){
+    if(!globalThis.confirm('Set every pixel to ' + type + '?')){
         return;
     }
 

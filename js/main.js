@@ -23,7 +23,7 @@ function repo_init(){
         },
         'grid-remake': {
           'onclick': function(){
-              if(!window.confirm('Remake grid?')){
+              if(!globalThis.confirm('Remake grid?')){
                   return;
               }
 
@@ -36,7 +36,7 @@ function repo_init(){
         },
         'uri-to-grid': {
           'onclick': function(){
-              if(!window.confirm('Set grid to URI?')){
+              if(!globalThis.confirm('Set grid to URI?')){
                   return;
               }
 

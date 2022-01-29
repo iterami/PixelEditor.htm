@@ -18,7 +18,6 @@ function fill(){
 }
 
 function grid_toggle(){
-    // If buttons don't currently have borders, add borders.
     const border_width = document.getElementById(0).style.borderWidth !== '1px'
       ? '1px'
       : 0;
@@ -68,7 +67,6 @@ function rgb_to_hex(rgb){
 function setup_dimensions(){
     pixelcount = core_storage_data['height'] * core_storage_data['width'];
 
-    // Create pixel divs.
     let loop_counter = pixelcount - 1;
     let output = '';
     do{
@@ -84,7 +82,6 @@ function setup_dimensions(){
     element.innerHTML = output;
     element.style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
 
-    // Add button CSS.
     loop_counter = pixelcount - 1;
     do{
         const element = document.getElementById(loop_counter);
@@ -96,7 +93,6 @@ function setup_dimensions(){
         element.style.width = core_storage_data['size'] + 'px';
     }while(loop_counter--);
 
-    // Set borderWidth of first button to use as grid toggle.
     document.getElementById(0).style.borderWidth = '1px';
 
     uri_to_grid();
@@ -105,17 +101,14 @@ function setup_dimensions(){
 function update_pixel(pixel, result){
     core_storage_save();
 
-    // Color picking mode.
     if(core_storage_data['mode'] === 1){
         document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);
 
-    // Transparency mode.
     }else if(core_storage_data['mode'] === 2){
         pixel.style.background = '#000';
         pixel.value = 'T';
         document.getElementById('color-hover').value = 'transparent';
 
-    // Set pixel color mode.
     }else{
         pixel.style.background = document.getElementById('color').value;
         pixel.value = '';
@@ -130,7 +123,6 @@ function update_pixel(pixel, result){
 }
 
 function update_result(){
-    // Paint canvas pixels based on colors of divs.
     const canvas_element = document.getElementById('canvas');
     canvas_element.height = core_storage_data['height'];
     canvas_element.width = core_storage_data['width'];
@@ -148,7 +140,6 @@ function update_result(){
     do{
         const element = document.getElementById(loop_counter);
 
-        // Only draw pixels that aren't transparent.
         if(element.value !== 'T'){
             canvas.fillStyle = element.style.backgroundColor;
 
@@ -159,11 +150,9 @@ function update_result(){
               1
             );
 
-            // Reset background color to black.
             canvas.fillStyle = '#000';
         }
 
-        // Only width pixels per row.
         if(loop_counter % core_storage_data['width'] === 0){
             row_counter -= 1;
         }
@@ -229,7 +218,6 @@ function uri_to_grid(){
                   element.value = 'T';
               }
 
-              // Only width pixels per row.
               if(loop_counter % core_storage_data['width'] === 0){
                   row_counter -= 1;
               }

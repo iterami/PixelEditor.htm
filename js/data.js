@@ -99,7 +99,11 @@ function setup_dimensions(){
 }
 
 function update_pixel(pixel, result){
-    core_storage_save();
+    core_storage_save({
+      'keys': [
+        'mode',
+      ],
+    });
 
     if(core_storage_data['mode'] === 1){
         document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);

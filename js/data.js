@@ -109,12 +109,12 @@ function update_pixel(pixel, result){
         document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);
 
     }else if(core_storage_data['mode'] === 2){
-        pixel.style.background = '#000';
+        pixel.style.backgroundColor = '#000';
         pixel.value = 'T';
         document.getElementById('color-hover').value = 'transparent';
 
     }else{
-        pixel.style.background = document.getElementById('color').value;
+        pixel.style.backgroundColor = document.getElementById('color').value;
         pixel.value = '';
         document.getElementById('color-hover').value = rgb_to_hex(pixel.style.backgroundColor);
     }

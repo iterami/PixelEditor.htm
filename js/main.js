@@ -53,7 +53,7 @@ function repo_init(){
         + '<input id=file type=file><input id=file-to-uri type=button value="Convert File to URI"><br>'
         + '<input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><input id=uri-to-grid type=button value="Set Grid to URI"><br>'
         + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
-        + ' <span id=x></span> <span id=y></span> <input class=mini id=color-hover readonly>',
+        + ' <span id=x></span> <span id=y></span> <input class=mini id=color-hover readonly type=text>',
       'menu': true,
       'menu-block-events': false,
       'storage': {
@@ -69,7 +69,7 @@ function repo_init(){
         + '<tr><td><select id=mode><option value=1>Color Picking</option><option value=0>Set Pixel Color</option><option value=2>Transparency</option></select><td>Mode'
         + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality'
         + '<tr><td><input class=mini id=size min=1 step=any type=number><td>px Size'
-        + '<tr><td><input id=type><td>Type'
+        + '<tr><td><input id=type type=text><td>Type'
         + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Width</table>',
       'title': 'PixelEditor.htm',
     });

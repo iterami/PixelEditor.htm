@@ -101,7 +101,7 @@ function repo_init(){
         'pixelcount': 0,
         'view': false,
       },
-      'info': '<textarea id=uri></textarea><br><canvas id=canvas style="border:solid 10px #000"></canvas> <span id=uri-length></span><hr>'
+      'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri-length></span><hr>'
         + '<input id=file type=file><input id=file-to-uri type=button value="Convert File to URI"><br>'
         + '<input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><input id=uri-to-grid type=button value="Set Grid to URI"><br>'
         + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
@@ -205,7 +205,7 @@ function update_pixel(pixel, result){
 }
 
 function update_result(){
-    const canvas_element = document.getElementById('canvas');
+    const canvas_element = document.getElementById('preview');
     canvas_element.height = core_storage_data['height'];
     canvas_element.width = core_storage_data['width'];
 
@@ -241,7 +241,7 @@ function update_result(){
     }while(loop_counter--);
 
     const uri = core_uri({
-      'id': 'canvas',
+      'id': 'preview',
       'quality': core_storage_data['quality'],
       'type': core_storage_data['type'],
     });
@@ -259,7 +259,7 @@ function uri_to_grid(){
       'id': 'uri',
       'src': core_storage_data['uri'],
       'todo': function(){
-          const canvas = document.getElementById('canvas').getContext('2d');
+          const canvas = document.getElementById('preview').getContext('2d');
 
           canvas.clearRect(
             0,

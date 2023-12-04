@@ -272,11 +272,7 @@ function uri_to_grid(){
             0,
             0
           );
-
-          Reflect.deleteProperty(
-            core_images,
-            'uri'
-          );
+          delete core_images['uri'];
 
           let loop_counter = pixelcount - 1;
           let row_counter = core_storage_data['height'];

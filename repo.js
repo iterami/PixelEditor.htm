@@ -177,11 +177,9 @@ function setup_dimensions(){
 }
 
 function update_pixel(pixel, result){
-    core_storage_save({
-      'keys': [
-        'mode',
-      ],
-    });
+    core_storage_save([
+      'mode',
+    ]);
 
     if(core_storage_data['mode'] === 1){
         document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);

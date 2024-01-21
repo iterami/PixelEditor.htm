@@ -102,9 +102,9 @@ function repo_init(){
         'view': false,
       },
       'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri-length></span><hr>'
-        + '<input id=file type=file><input id=file-to-uri type=button value="Convert File to URI"><br>'
-        + '<input id=grid-remake type=button value="Remake Grid"><input id=grid-toggle type=button value="Toggle Borders"><input id=uri-to-grid type=button value="Set Grid to URI"><br>'
-        + '<input id=color type=color value=#ffffff><input id=fill type=button value=Fill>'
+        + '<input id=file type=file><button id=file-to-uri type=button>Convert File to URI</button><br>'
+        + '<button id=grid-remake type=button>Remake Grid</button><button id=grid-toggle type=button>Toggle Borders</button><button id=uri-to-grid type=button>Set Grid to URI</button><br>'
+        + '<input id=color type=color value=#ffffff><button id=fill type=button>Fill</button>'
         + ' <span id=x></span> <span id=y></span> <input class=mini id=color-hover readonly type=text>',
       'menu': true,
       'menu-block-events': false,
@@ -148,8 +148,8 @@ function setup_dimensions(){
     let loop_counter = pixelcount - 1;
     let output = '';
     do{
-        output += '<input class=gridbutton id=' + loop_counter
-          + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button>';
+        output += '<button class=gridbutton id=' + loop_counter
+          + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button></button>';
 
         if(loop_counter % core_storage_data['width'] === 0){
             output += '<br>';

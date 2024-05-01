@@ -33,7 +33,7 @@ function hexvalues(i){
 }
 
 function hover_pixel(pixel){
-    document.getElementById('color-hover').value = pixel.value === 'T'
+    document.getElementById('color-hover').value = pixel.textContent === 'T'
       ? 'transparent'
       : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
@@ -186,12 +186,12 @@ function update_pixel(pixel, result){
 
     }else if(core_storage_data['mode'] === 2){
         pixel.style.backgroundColor = '#000';
-        pixel.value = 'T';
+        pixel.textContent = 'T';
         document.getElementById('color-hover').value = 'transparent';
 
     }else{
         pixel.style.backgroundColor = document.getElementById('color').value;
-        pixel.value = '';
+        pixel.textContent = '';
         document.getElementById('color-hover').value = rgb_to_hex(pixel.style.backgroundColor);
     }
 
@@ -220,7 +220,7 @@ function update_result(){
     do{
         const element = document.getElementById(loop_counter);
 
-        if(element.value !== 'T'){
+        if(element.textContent !== 'T'){
             canvas.fillStyle = element.style.backgroundColor;
 
             canvas.fillRect(
@@ -288,10 +288,10 @@ function uri_to_grid(){
                     + hexvalues((pixel['data'][0] - pixel['data'][0] % 16) / 16) + hexvalues(pixel['data'][0] % 16)
                     + hexvalues((pixel['data'][1] - pixel['data'][1] % 16) / 16) + hexvalues(pixel['data'][1] % 16)
                     + hexvalues((pixel['data'][2] - pixel['data'][2] % 16) / 16) + hexvalues(pixel['data'][2] % 16);
-                  element.value = '';
+                  element.textContent = '';
 
               }else{
-                  element.value = 'T';
+                  element.textContent = 'T';
               }
 
               if(loop_counter % core_storage_data['width'] === 0){

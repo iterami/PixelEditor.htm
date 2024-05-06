@@ -162,13 +162,12 @@ function setup_dimensions(){
 
     loop_counter = pixelcount - 1;
     do{
-        const element = document.getElementById(loop_counter);
-
-        element.style.borderColor = '#aaa';
-        element.style.borderWidth = '1px';
-        element.style.height = core_storage_data['size'] + 'px';
-        element.style.margin = 0;
-        element.style.width = core_storage_data['size'] + 'px';
+        const style = document.getElementById(loop_counter).style;
+        style.borderColor = '#aaa';
+        style.borderWidth = '1px';
+        style.height = core_storage_data['size'] + 'px';
+        style.margin = 0;
+        style.width = core_storage_data['size'] + 'px';
     }while(loop_counter--);
 
     document.getElementById(0).style.borderWidth = '1px';

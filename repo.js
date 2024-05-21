@@ -98,8 +98,8 @@ function repo_init(){
         },
       },
       'globals': {
+        'edited': false,
         'pixelcount': 0,
-        'view': false,
       },
       'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri-length></span><hr>'
         + '<input id=file type=file><button id=file-to-uri type=button>Convert File to URI</button><br>'
@@ -176,6 +176,7 @@ function setup_dimensions(){
 }
 
 function update_pixel(pixel, result){
+    edited = true;
     core_storage_save([
       'mode',
     ]);
@@ -213,6 +214,10 @@ function update_result(){
       canvas_element.width,
       canvas_element.height
     );
+
+    if(!edited){
+        return;
+    }
 
     let loop_counter = pixelcount - 1;
     let row_counter = core_storage_data['height'];

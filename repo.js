@@ -243,7 +243,7 @@ function update_result(){
     }while(loop_counter--);
 
     const uri = core_uri({
-      'id': 'preview',
+      'element': canvas_element,
       'quality': core_storage_data['quality'],
       'type': core_storage_data['type'],
     });

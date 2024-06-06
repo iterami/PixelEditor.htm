@@ -3,7 +3,7 @@
 function fill(){
     const type = core_storage_data['mode'] === 2
       ? 'transparent'
-      : document.getElementById('color').value;
+      : core_elements['color'].value;
 
     if(!globalThis.confirm('Set every pixel to ' + type + '?')){
         return;
@@ -11,20 +11,20 @@ function fill(){
 
     let loop_counter = pixelcount - 1;
     do{
-        update_pixel(document.getElementById(loop_counter));
+        update_pixel(core_elements[loop_counter]);
     }while(loop_counter--);
 
     update_result();
 }
 
 function grid_toggle(){
-    const border_width = document.getElementById(0).style.borderWidth !== '1px'
+    const border_width = core_elements[0].style.borderWidth !== '1px'
       ? '1px'
       : 0;
 
     let loop_counter = pixelcount - 1;
     do{
-        document.getElementById(loop_counter).style.borderWidth = border_width;
+        core_elements[loop_counter].style.borderWidth = border_width;
     }while(loop_counter--);
 }
 
@@ -33,14 +33,14 @@ function hexvalues(i){
 }
 
 function hover_pixel(pixel){
-    document.getElementById('color-hover').value = pixel.textContent === 'T'
+    core_elements['color-hover'].value = pixel.textContent === 'T'
       ? 'transparent'
       : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
-    document.getElementById('x').textContent = core_digits_min({
+    core_elements['x'].textContent = core_digits_min({
       'number': core_storage_data['width'] - pixel.id % core_storage_data['width'],
     });
-    document.getElementById('y').textContent = core_digits_min({
+    core_elements['y'].textContent = core_digits_min({
       'number': core_storage_data['height'] - Math.floor(pixel.id / core_storage_data['width']),
     });
 
@@ -57,7 +57,7 @@ function repo_init(){
       'events': {
         'file-to-uri': {
           'onclick': function(){
-              const files = document.getElementById('file').files;
+              const files = core_elements['file'].files;
               if(files.length === 0){
                   return;
               }
@@ -65,7 +65,7 @@ function repo_init(){
               core_file({
                 'file': files[0],
                 'todo': function(event){
-                    document.getElementById('uri').value = event.target.result;
+                    core_elements['uri'].value = event.target.result;
                 },
               });
           },
@@ -124,10 +124,21 @@ function repo_init(){
         + '<tr><td><input id=type type=text><td>Type'
         + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Width</table>',
       'title': 'PixelEditor.htm',
+      'ui-elements': [
+        'color',
+        'color-hover',
+        'edit',
+        'file',
+        'preview',
+        'uri',
+        'uri-length',
+        'x',
+        'y',
+      ],
     });
 
     setup_dimensions();
-    document.getElementById('edit').style.userSelect = 'none';
+    core_elements['edit'].style.userSelect = 'none';
 }
 
 function rgb_to_hex(rgb){
@@ -156,13 +167,18 @@ function setup_dimensions(){
         }
     }while(loop_counter--);
 
-    const element = document.getElementById('edit');
-    element.innerHTML = output;
-    element.style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
+    core_elements['edit'].innerHTML = output;
+    core_elements['edit'].style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
 
+    for(const element in core_elements){
+        if(!globalThis.isNaN(element)){
+            delete core_elements[element];
+        }
+    }
     loop_counter = pixelcount - 1;
     do{
-        const style = document.getElementById(loop_counter).style;
+        core_elements[loop_counter] = document.getElementById(loop_counter);
+        const style = core_elements[loop_counter].style;
         style.borderColor = '#aaa';
         style.borderWidth = '1px';
         style.height = core_storage_data['size'] + 'px';
@@ -170,7 +186,7 @@ function setup_dimensions(){
         style.width = core_storage_data['size'] + 'px';
     }while(loop_counter--);
 
-    document.getElementById(0).style.borderWidth = '1px';
+    core_elements[0].style.borderWidth = '1px';
 
     uri_to_grid();
 }
@@ -182,17 +198,17 @@ function update_pixel(pixel, result){
     ]);
 
     if(core_storage_data['mode'] === 1){
-        document.getElementById('color').value = rgb_to_hex(pixel.style.backgroundColor);
+        core_elements['color'].value = rgb_to_hex(pixel.style.backgroundColor);
 
     }else if(core_storage_data['mode'] === 2){
         pixel.style.backgroundColor = '#000';
         pixel.textContent = 'T';
-        document.getElementById('color-hover').value = 'transparent';
+        core_elements['color-hover'].value = 'transparent';
 
     }else{
-        pixel.style.backgroundColor = document.getElementById('color').value;
+        pixel.style.backgroundColor = core_elements['color'].value;
         pixel.textContent = '';
-        document.getElementById('color-hover').value = rgb_to_hex(pixel.style.backgroundColor);
+        core_elements['color-hover'].value = rgb_to_hex(pixel.style.backgroundColor);
     }
 
     if(result === true){
@@ -203,7 +219,7 @@ function update_pixel(pixel, result){
 }
 
 function update_result(){
-    const canvas_element = document.getElementById('preview');
+    const canvas_element = core_elements['preview'];
     canvas_element.height = core_storage_data['height'];
     canvas_element.width = core_storage_data['width'];
 
@@ -222,10 +238,8 @@ function update_result(){
     let loop_counter = pixelcount - 1;
     let row_counter = core_storage_data['height'];
     do{
-        const element = document.getElementById(loop_counter);
-
-        if(element.textContent !== 'T'){
-            canvas.fillStyle = element.style.backgroundColor;
+        if(core_elements[loop_counter].textContent !== 'T'){
+            canvas.fillStyle = core_elements[loop_counter].style.backgroundColor;
 
             canvas.fillRect(
               row_counter * core_storage_data['width'] - loop_counter - 1,
@@ -247,8 +261,8 @@ function update_result(){
       'quality': core_storage_data['quality'],
       'type': core_storage_data['type'],
     });
-    document.getElementById('uri').value = uri;
-    document.getElementById('uri-length').innerHTML = uri.length;
+    core_elements['uri'].value = uri;
+    core_elements['uri-length'].innerHTML = uri.length;
 }
 
 function uri_to_grid(){
@@ -261,7 +275,7 @@ function uri_to_grid(){
       'id': 'uri',
       'src': core_storage_data['uri'],
       'todo': function(){
-          const canvas = document.getElementById('preview').getContext('2d');
+          const canvas = core_elements['preview'].getContext('2d');
 
           canvas.clearRect(
             0,
@@ -285,17 +299,15 @@ function uri_to_grid(){
                 1,
                 1
               );
-              const element = document.getElementById(loop_counter);
-
               if(pixel['data'][3] > 0){
-                  element.style.backgroundColor = '#'
+                  core_elements[loop_counter].style.backgroundColor = '#'
                     + hexvalues((pixel['data'][0] - pixel['data'][0] % 16) / 16) + hexvalues(pixel['data'][0] % 16)
                     + hexvalues((pixel['data'][1] - pixel['data'][1] % 16) / 16) + hexvalues(pixel['data'][1] % 16)
                     + hexvalues((pixel['data'][2] - pixel['data'][2] % 16) / 16) + hexvalues(pixel['data'][2] % 16);
-                  element.textContent = '';
+                  core_elements[loop_counter].textContent = '';
 
               }else{
-                  element.textContent = 'T';
+                  core_elements[loop_counter].textContent = 'T';
               }
 
               if(loop_counter % core_storage_data['width'] === 0){

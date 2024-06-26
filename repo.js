@@ -37,11 +37,12 @@ function hover_pixel(pixel){
       ? 'transparent'
       : rgb_to_hex(pixel.style.backgroundColor || 'rgb(0, 0, 0)');
 
+    const width = Math.floor(core_storage_data['width']);
     core_elements['x'].textContent = core_digits_min({
-      'number': core_storage_data['width'] - pixel.id % core_storage_data['width'],
+      'number': width - pixel.id % width,
     });
     core_elements['y'].textContent = core_digits_min({
-      'number': core_storage_data['height'] - Math.floor(pixel.id / core_storage_data['width']),
+      'number': Math.floor(core_storage_data['height']) - Math.floor(pixel.id / width),
     });
 
     if(core_mouse['down-0']){
@@ -117,12 +118,12 @@ function repo_init(){
         'uri': '',
         'width': 32,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=height min=1 step=any type=number><td>Height'
+      'storage-menu': '<table><tr><td><input class=mini id=height min=1 step=1 type=number><td>Height'
         + '<tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
         + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality'
         + '<tr><td><input class=mini id=size min=1 step=any type=number><td>px Size'
         + '<tr><td><input id=type type=text><td>Type'
-        + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Width</table>',
+        + '<tr><td><input class=mini id=width min=1 step=1 type=number><td>Width</table>',
       'title': 'PixelEditor.htm',
       'ui-elements': [
         'color',
@@ -154,7 +155,8 @@ function rgb_to_hex(rgb){
 }
 
 function setup_dimensions(){
-    pixelcount = core_storage_data['height'] * core_storage_data['width'];
+    const width = Math.floor(core_storage_data['width']);
+    pixelcount = Math.floor(core_storage_data['height']) * width;
 
     let loop_counter = pixelcount - 1;
     let output = '';
@@ -162,13 +164,13 @@ function setup_dimensions(){
         output += '<button class=gridbutton id=' + loop_counter
           + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button></button>';
 
-        if(loop_counter % core_storage_data['width'] === 0){
+        if(loop_counter % width === 0){
             output += '<br>';
         }
     }while(loop_counter--);
 
     core_elements['edit'].innerHTML = output;
-    core_elements['edit'].style.minWidth = (core_storage_data['width'] * core_storage_data['size']) + 'px';
+    core_elements['edit'].style.minWidth = (width * core_storage_data['size']) + 'px';
 
     for(const element in core_elements){
         if(!globalThis.isNaN(element)){
@@ -219,9 +221,11 @@ function update_pixel(pixel, result){
 }
 
 function update_result(){
+    const height = Math.floor(core_storage_data['height']);
+    const width = Math.floor(core_storage_data['width']);
     const canvas_element = core_elements['preview'];
-    canvas_element.height = core_storage_data['height'];
-    canvas_element.width = core_storage_data['width'];
+    canvas_element.height = height;
+    canvas_element.width = width;
 
     const canvas = canvas_element.getContext('2d');
     canvas.clearRect(
@@ -236,14 +240,14 @@ function update_result(){
     }
 
     let loop_counter = pixelcount - 1;
-    let row_counter = core_storage_data['height'];
+    let row_counter = height;
     do{
         if(core_elements[loop_counter].textContent !== 'T'){
             canvas.fillStyle = core_elements[loop_counter].style.backgroundColor;
 
             canvas.fillRect(
-              row_counter * core_storage_data['width'] - loop_counter - 1,
-              core_storage_data['height'] - row_counter,
+              row_counter * width - loop_counter - 1,
+              height - row_counter,
               1,
               1
             );
@@ -251,7 +255,7 @@ function update_result(){
             canvas.fillStyle = '#000';
         }
 
-        if(loop_counter % core_storage_data['width'] === 0){
+        if(loop_counter % width === 0){
             row_counter -= 1;
         }
     }while(loop_counter--);
@@ -276,12 +280,14 @@ function uri_to_grid(){
       'src': core_storage_data['uri'],
       'todo': function(){
           const canvas = core_elements['preview'].getContext('2d');
+          const height = Math.floor(core_storage_data['height']);
+          const width = Math.floor(core_storage_data['width']);
 
           canvas.clearRect(
             0,
             0,
-            core_storage_data['width'],
-            core_storage_data['height']
+            width,
+            height
           );
           canvas.drawImage(
             core_images['uri'],
@@ -291,11 +297,11 @@ function uri_to_grid(){
           delete core_images['uri'];
 
           let loop_counter = pixelcount - 1;
-          let row_counter = core_storage_data['height'];
+          let row_counter = height;
           do{
               const pixel = canvas.getImageData(
-                row_counter * core_storage_data['width'] - loop_counter - 1,
-                core_storage_data['height'] - row_counter,
+                row_counter * width - loop_counter - 1,
+                height - row_counter,
                 1,
                 1
               );
@@ -310,7 +316,7 @@ function uri_to_grid(){
                   core_elements[loop_counter].textContent = 'T';
               }
 
-              if(loop_counter % core_storage_data['width'] === 0){
+              if(loop_counter % width === 0){
                   row_counter -= 1;
               }
           }while(loop_counter--);

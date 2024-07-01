@@ -181,6 +181,7 @@ function setup_dimensions(){
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
         const style = core_elements[loop_counter].style;
+        style.backgroundColor = '#000';
         style.borderColor = '#aaa';
         style.borderWidth = '1px';
         style.height = core_storage_data['size'] + 'px';

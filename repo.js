@@ -102,7 +102,7 @@ function repo_init(){
         'edited': false,
         'pixelcount': 0,
       },
-      'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri-length></span><hr>'
+      'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri-length></span><br>'
         + '<input id=file type=file><button id=file-to-uri type=button>Convert File to URI</button><br>'
         + '<button id=grid-remake type=button>Remake Grid</button><button id=grid-toggle type=button>Toggle Borders</button><button id=uri-to-grid type=button>Set Grid to URI</button><br>'
         + '<input id=color type=color value=#ffffff><button id=fill type=button>Fill</button>'

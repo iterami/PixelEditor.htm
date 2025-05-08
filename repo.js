@@ -45,7 +45,7 @@ function hover_pixel(pixel){
       'number': Math.floor(core_storage_data['height']) - Math.floor(pixel.id / width),
     });
 
-    if(core_mouse['down-0']){
+    if(core_pointer['down-0']){
         update_pixel(
           pixel,
           true
@@ -162,7 +162,7 @@ function setup_dimensions(){
     let output = '';
     do{
         output += '<button class=gridbutton id=' + loop_counter
-          + ' onmousedown="update_pixel(this, true)" onmouseover="hover_pixel(this)" type=button></button>';
+          + ' onpointerdown="update_pixel(this, true)" onpointerover="hover_pixel(this)" type=button></button>';
 
         if(loop_counter % width === 0){
             output += '<br>';
@@ -218,7 +218,7 @@ function update_pixel(pixel, result){
         update_result();
     }
 
-    core_mouse['down-0'] = true;
+    core_pointer['down-0'] = true;
 }
 
 function update_result(){

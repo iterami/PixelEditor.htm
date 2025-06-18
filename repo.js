@@ -108,7 +108,7 @@ function repo_init(){
         + '<input id=color type=color value=#ffffff><button id=fill type=button>Fill</button>'
         + ' <span id=x></span> <span id=y></span> <input class=mini id=color_hover readonly type=text>',
       'menu': true,
-      'menu-block-events': false,
+      'menu_block_events': false,
       'storage': {
         'height': 32,
         'mode': 0,

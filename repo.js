@@ -125,7 +125,7 @@ function repo_init(){
         + '<tr><td><input id=type type=text><td>Type'
         + '<tr><td><input class=mini id=width min=1 step=1 type=number><td>Width</table>',
       'title': 'PixelEditor.htm',
-      'ui-elements': [
+      'ui_elements': [
         'color',
         'color_hover',
         'edit',

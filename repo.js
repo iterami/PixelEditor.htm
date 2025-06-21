@@ -45,7 +45,7 @@ function hover_pixel(pixel){
       'number': Math.floor(core_storage_data.height) - Math.floor(pixel.id / width),
     });
 
-    if(core_pointer['down-0']){
+    if(core_pointer.down_0){
         update_pixel(
           pixel,
           true
@@ -218,7 +218,7 @@ function update_pixel(pixel, result){
         update_result();
     }
 
-    core_pointer['down-0'] = true;
+    core_pointer.down_0 = true;
 }
 
 function update_result(){

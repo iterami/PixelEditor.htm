@@ -118,7 +118,7 @@ function repo_init(){
         'uri': '',
         'width': 32,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=height min=1 step=1 type=number><td>Height'
+      'storage_menu': '<table><tr><td><input class=mini id=height min=1 step=1 type=number><td>Height'
         + '<tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
         + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality'
         + '<tr><td><input class=mini id=size min=1 step=any type=number><td>px Size'

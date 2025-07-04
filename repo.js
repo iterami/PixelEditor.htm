@@ -113,7 +113,7 @@ function repo_init(){
         'height': 32,
         'mode': 0,
         'quality': 1,
-        'size': 25,
+        'size': '25px',
         'type': 'image/png',
         'uri': '',
         'width': 32,
@@ -121,7 +121,7 @@ function repo_init(){
       'storage_menu': '<table><tr><td><input class=mini id=height min=1 step=1 type=number><td>Height'
         + '<tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
         + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality'
-        + '<tr><td><input class=mini id=size min=1 step=any type=number><td>px Size'
+        + '<tr><td><input class=mini id=size type=text><td>px Size'
         + '<tr><td><input id=type type=text><td>Type'
         + '<tr><td><input class=mini id=width min=1 step=1 type=number><td>Width</table>',
       'title': 'PixelEditor.htm',
@@ -170,7 +170,6 @@ function setup_dimensions(){
     }while(loop_counter--);
 
     core_elements.edit.innerHTML = output;
-    core_elements.edit.style.minWidth = (width * core_storage_data.size) + 'px';
 
     for(const element in core_elements){
         if(!globalThis.isNaN(element)){
@@ -184,12 +183,13 @@ function setup_dimensions(){
         style.backgroundColor = '#000';
         style.borderColor = '#aaa';
         style.borderWidth = '1px';
-        style.height = core_storage_data.size + 'px';
+        style.height = core_storage_data.size;
         style.margin = 0;
-        style.width = core_storage_data.size + 'px';
+        style.width = core_storage_data.size;
     }while(loop_counter--);
 
     core_elements[0].style.borderWidth = '1px';
+    core_elements.edit.style.minWidth = (width * core_elements[0].offsetWidth) + 'px';
 
     uri_to_grid();
 }

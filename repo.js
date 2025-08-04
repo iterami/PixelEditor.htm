@@ -109,6 +109,7 @@ function repo_init(){
         + ' <span id=x></span> <span id=y></span> <input class=mini id=color_hover readonly type=text>',
       'menu': true,
       'menu_block_events': false,
+      'pointerbinds': {},
       'storage': {
         'height': 32,
         'mode': 0,
@@ -196,9 +197,6 @@ function setup_dimensions(){
 
 function update_pixel(pixel, result){
     edited = true;
-    core_storage_save([
-      'mode',
-    ]);
 
     if(core_storage_data.mode === 1){
         core_elements.color.value = rgb_to_hex(pixel.style.backgroundColor);
@@ -217,11 +215,16 @@ function update_pixel(pixel, result){
     if(result === true){
         update_result();
     }
-
-    core_pointer.down_0 = true;
 }
 
 function update_result(){
+    core_storage_save([
+      'height',
+      'quality',
+      'type',
+      'width',
+    ]);
+
     const height = Math.floor(core_storage_data.height);
     const width = Math.floor(core_storage_data.width);
     const canvas_element = core_elements.preview;
@@ -268,6 +271,10 @@ function update_result(){
     });
     core_elements.uri.value = uri;
     core_elements.uri_length.innerHTML = uri.length;
+
+    core_storage_save([
+      'uri',
+    ]);
 }
 
 function uri_to_grid(){

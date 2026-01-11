@@ -80,7 +80,9 @@ function repo_init(){
                   return;
               }
 
-              core_storage_save();
+              core_storage_save({
+                'rebind': false,
+              });
               setup_dimensions();
           },
         },
@@ -93,7 +95,9 @@ function repo_init(){
                   return;
               }
 
-              core_storage_save();
+              core_storage_save({
+                'rebind': false,
+              });
               uri_to_grid();
           },
         },
@@ -218,12 +222,15 @@ function update_pixel(pixel, result){
 }
 
 function update_result(){
-    core_storage_save([
-      'height',
-      'quality',
-      'type',
-      'width',
-    ]);
+    core_storage_save({
+      'keys': [
+        'height',
+        'quality',
+        'type',
+        'width',
+      ],
+      'rebind': false,
+    });
 
     const height = Math.floor(core_storage_data.height);
     const width = Math.floor(core_storage_data.width);
@@ -272,9 +279,12 @@ function update_result(){
     core_elements.uri.value = uri;
     core_elements.uri_length.innerHTML = uri.length;
 
-    core_storage_save([
-      'uri',
-    ]);
+    core_storage_save({
+      'keys': [
+        'uri',
+      ],
+      'rebind': false,
+    });
 }
 
 function uri_to_grid(){

@@ -9,10 +9,9 @@ function fill(){
         return;
     }
 
-    let loop_counter = pixelcount - 1;
-    do{
-        update_pixel(core_elements[loop_counter]);
-    }while(loop_counter--);
+    for(let i = 0; i < pixelcount; i++){
+        update_pixel(core_elements[i]);
+    }
 
     update_result();
 }
@@ -22,10 +21,9 @@ function grid_toggle(){
       ? '1px'
       : 0;
 
-    let loop_counter = pixelcount - 1;
-    do{
-        core_elements[loop_counter].style.borderWidth = border_width;
-    }while(loop_counter--);
+    for(let i = 0; i < pixelcount; i++){
+        core_elements[i].style.borderWidth = border_width;
+    }
 }
 
 function hexvalues(i){
@@ -103,7 +101,6 @@ function repo_init(){
         },
       },
       'globals': {
-        'edited': false,
         'pixelcount': 0,
       },
       'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri_length></span><br>'
@@ -163,16 +160,15 @@ function setup_dimensions(){
     const width = Math.floor(core_storage_data.width);
     pixelcount = Math.floor(core_storage_data.height) * width;
 
-    let loop_counter = pixelcount - 1;
     let output = '';
-    do{
-        output += '<button class=gridbutton id=' + loop_counter
+    for(let i = 0; i < pixelcount; i++){
+        output += '<button class=gridbutton id=' + i
           + ' onpointerdown="update_pixel(this, true)" onpointerover="hover_pixel(this)" type=button></button>';
 
-        if(loop_counter % width === 0){
+        if((i + 1) % width === 0){
             output += '<br>';
         }
-    }while(loop_counter--);
+    }
 
     core_elements.edit.innerHTML = output;
 
@@ -181,17 +177,16 @@ function setup_dimensions(){
             delete core_elements[element];
         }
     }
-    loop_counter = pixelcount - 1;
-    do{
-        core_elements[loop_counter] = document.getElementById(loop_counter);
-        const style = core_elements[loop_counter].style;
+    for(let i = 0; i < pixelcount; i++){
+        core_elements[i] = document.getElementById(i);
+        const style = core_elements[i].style;
         style.backgroundColor = '#000';
         style.borderColor = '#aaa';
         style.borderWidth = '1px';
         style.height = core_storage_data.size;
         style.margin = 0;
         style.width = core_storage_data.size;
-    }while(loop_counter--);
+    }
 
     core_elements[0].style.borderWidth = '1px';
     core_elements.edit.style.minWidth = (width * core_elements[0].offsetWidth) + 'px';
@@ -200,8 +195,6 @@ function setup_dimensions(){
 }
 
 function update_pixel(pixel, result){
-    edited = true;
-
     if(core_storage_data.mode === 1){
         core_elements.color.value = rgb_to_hex(pixel.style.backgroundColor);
 
@@ -246,19 +239,13 @@ function update_result(){
       canvas_element.height
     );
 
-    if(!edited){
-        return;
-    }
-
-    let loop_counter = pixelcount - 1;
-    let row_counter = height;
-    do{
-        if(core_elements[loop_counter].textContent !== 'T'){
-            canvas.fillStyle = core_elements[loop_counter].style.backgroundColor;
-
+    let row_counter = 0;
+    for(let i = 0; i < pixelcount; i++){
+        if(core_elements[i].textContent !== 'T'){
+            canvas.fillStyle = core_elements[i].style.backgroundColor;
             canvas.fillRect(
-              row_counter * width - loop_counter - 1,
-              height - row_counter,
+              i % width,
+              row_counter,
               1,
               1
             );
@@ -266,10 +253,10 @@ function update_result(){
             canvas.fillStyle = '#000';
         }
 
-        if(loop_counter % width === 0){
-            row_counter -= 1;
+        if((i + 1) % width === 0){
+            row_counter++;
         }
-    }while(loop_counter--);
+    }
 
     const uri = core_uri({
       'element': canvas_element,
@@ -314,30 +301,29 @@ function uri_to_grid(){
           );
           delete core_images.uri;
 
-          let loop_counter = pixelcount - 1;
-          let row_counter = height;
-          do{
+          let row_counter = 0;
+          for(let i = 0; i < pixelcount; i++){
               const pixel = canvas.getImageData(
-                row_counter * width - loop_counter - 1,
-                height - row_counter,
+                i % width,
+                row_counter,
                 1,
                 1
               );
               if(pixel.data[3] > 0){
-                  core_elements[loop_counter].style.backgroundColor = '#'
+                  core_elements[i].style.backgroundColor = '#'
                     + hexvalues((pixel.data[0] - pixel.data[0] % 16) / 16) + hexvalues(pixel.data[0] % 16)
                     + hexvalues((pixel.data[1] - pixel.data[1] % 16) / 16) + hexvalues(pixel.data[1] % 16)
                     + hexvalues((pixel.data[2] - pixel.data[2] % 16) / 16) + hexvalues(pixel.data[2] % 16);
-                  core_elements[loop_counter].textContent = '';
+                  core_elements[i].textContent = '';
 
               }else{
-                  core_elements[loop_counter].textContent = 'T';
+                  core_elements[i].textContent = 'T';
               }
 
-              if(loop_counter % width === 0){
-                  row_counter -= 1;
+              if((i + 1) % width === 0){
+                  row_counter++
               }
-          }while(loop_counter--);
+          }
 
           update_result();
       },

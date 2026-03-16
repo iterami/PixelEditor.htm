@@ -120,12 +120,11 @@ function repo_init(){
         'uri': '',
         'width': 32,
       },
-      'storage_menu': '<table><tr><td><input class=mini id=height min=1 step=1 type=number><td>Height'
-        + '<tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
-        + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality'
-        + '<tr><td><input class=mini id=size type=text><td>px Size'
+      'storage_menu': '<table><tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
+        + '<tr><td><input class=mini id=height min=1 step=1 type=number>x<input class=mini id=width min=1 step=1 type=number><td>Grid Size'
+        + '<tr><td><input class=mini id=size type=text><td>Pixel Size'
         + '<tr><td><input id=type type=text><td>Type'
-        + '<tr><td><input class=mini id=width min=1 step=1 type=number><td>Width</table>',
+        + '<tr><td><input class=mini id=quality max=1 min=0 step=any type=number><td>Quality</table>',
       'title': 'PixelEditor.htm',
       'ui_elements': [
         'color',

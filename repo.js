@@ -17,8 +17,8 @@ function fill(){
 }
 
 function grid_toggle(){
-    const border_width = core_elements[0].style.borderWidth !== '1px'
-      ? '1px'
+    const border_width = core_elements[0].style.borderWidth !== core_storage_data.border
+      ? core_storage_data.border
       : 0;
 
     for(let i = 0; i < pixelcount; i++){
@@ -112,6 +112,7 @@ function repo_init(){
       'menu_block_events': false,
       'pointerbinds': {},
       'storage': {
+        'border': '1px',
         'height': 32,
         'mode': 0,
         'quality': 1,
@@ -121,6 +122,7 @@ function repo_init(){
         'width': 32,
       },
       'storage_menu': '<table><tr><td><select id=mode><option value=1>Color Picking<option value=0>Set Pixel Color<option value=2>Transparency</select><td>Mode'
+        + '<tr><td><input class=mini id=border type=text><td>Border Size'
         + '<tr><td><input class=mini id=width min=1 step=1 type=number>x <input class=mini id=height min=1 step=1 type=number>y<td>Grid Size'
         + '<tr><td><input class=mini id=size type=text><td>Pixel Size'
         + '<tr><td><input id=type type=text><td>Type'
@@ -181,13 +183,13 @@ function setup_dimensions(){
         const style = core_elements[i].style;
         style.backgroundColor = '#000';
         style.borderColor = '#aaa';
-        style.borderWidth = '1px';
+        style.borderWidth = core_storage_data.border;
         style.height = core_storage_data.size;
         style.margin = 0;
         style.width = core_storage_data.size;
     }
 
-    core_elements[0].style.borderWidth = '1px';
+    core_elements[0].style.borderWidth = core_storage_data.border;
     core_elements.edit.style.minWidth = (width * core_elements[0].offsetWidth) + 'px';
 
     uri_to_grid();

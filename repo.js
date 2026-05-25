@@ -103,7 +103,7 @@ function repo_init(){
       'globals': {
         'pixelcount': 0,
       },
-      'info': '<textarea id=uri></textarea><br><canvas id=preview style="border:solid 10px #000"></canvas> <span id=uri_length></span><br>'
+      'info': '<textarea id=uri></textarea><br><canvas id=preview></canvas> <span id=uri_length></span><br>'
         + '<input id=file type=file><button id=file_to_uri type=button>Convert File to URI</button><br>'
         + '<button id=grid_remake type=button>Remake Grid</button><button id=grid_toggle type=button>Toggle Borders</button><button id=uri_to_grid type=button>Set Grid to URI</button><br>'
         + '<input id=color type=color value=#ffffff><button id=fill type=button>Fill</button>'
@@ -143,6 +143,7 @@ function repo_init(){
 
     setup_dimensions();
     core_elements.edit.style.userSelect = 'none';
+    core_elements.preview.style.border = 'solid 10px #000';
 }
 
 function rgb_to_hex(rgb){

@@ -260,11 +260,10 @@ function update_result(){
         }
     }
 
-    const uri = core_uri({
-      'element': canvas_element,
-      'quality': core_storage_data.quality,
-      'type': core_storage_data.type,
-    });
+    const uri = canvas_element.toDataURL(
+      core_storage_data.type,
+      core_storage_data.quality,
+    );
     core_elements.uri.value = uri;
     core_elements.uri_length.innerHTML = uri.length;
 

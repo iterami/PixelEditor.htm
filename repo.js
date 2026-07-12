@@ -183,8 +183,7 @@ function setup_dimensions(){
         core_elements[i] = document.getElementById(i);
         const style = core_elements[i].style;
         style.backgroundColor = '#000';
-        style.borderColor = '#aaa';
-        style.borderWidth = core_storage_data.border;
+        style.border = core_storage_data.border + ' solid #aaa';
         style.height = core_storage_data.size;
         style.margin = 0;
         style.width = core_storage_data.size;
@@ -281,52 +280,49 @@ function uri_to_grid(){
         return;
     }
 
-    core_image({
-      'id': 'uri',
-      'src': core_storage_data.uri,
-      'todo': function(){
-          const canvas = core_elements.preview.getContext('2d');
-          const height = Math.floor(core_storage_data.height);
-          const width = Math.floor(core_storage_data.width);
+    const image = new Image();
+    image.onload = function(event){
+        const canvas = core_elements.preview.getContext('2d');
+        const height = Math.floor(core_storage_data.height);
+        const width = Math.floor(core_storage_data.width);
 
-          canvas.clearRect(
-            0,
-            0,
-            width,
-            height
-          );
-          canvas.drawImage(
-            core_images.uri,
-            0,
-            0
-          );
-          delete core_images.uri;
+        canvas.clearRect(
+          0,
+          0,
+          width,
+          height
+        );
+        canvas.drawImage(
+          event.target,
+          0,
+          0
+        );
 
-          let row_counter = 0;
-          for(let i = 0; i < pixelcount; i++){
-              const pixel = canvas.getImageData(
-                i % width,
-                row_counter,
-                1,
-                1
-              );
-              if(pixel.data[3] > 0){
-                  core_elements[i].style.backgroundColor = '#'
-                    + hexvalues((pixel.data[0] - pixel.data[0] % 16) / 16) + hexvalues(pixel.data[0] % 16)
-                    + hexvalues((pixel.data[1] - pixel.data[1] % 16) / 16) + hexvalues(pixel.data[1] % 16)
-                    + hexvalues((pixel.data[2] - pixel.data[2] % 16) / 16) + hexvalues(pixel.data[2] % 16);
-                  core_elements[i].textContent = '';
+        let row_counter = 0;
+        for(let i = 0; i < pixelcount; i++){
+            const pixel = canvas.getImageData(
+              i % width,
+              row_counter,
+              1,
+              1
+            );
+            if(pixel.data[3] > 0){
+                core_elements[i].style.backgroundColor = '#'
+                  + hexvalues((pixel.data[0] - pixel.data[0] % 16) / 16) + hexvalues(pixel.data[0] % 16)
+                  + hexvalues((pixel.data[1] - pixel.data[1] % 16) / 16) + hexvalues(pixel.data[1] % 16)
+                  + hexvalues((pixel.data[2] - pixel.data[2] % 16) / 16) + hexvalues(pixel.data[2] % 16);
+                core_elements[i].textContent = '';
 
-              }else{
-                  core_elements[i].textContent = 'T';
-              }
+            }else{
+                core_elements[i].textContent = 'T';
+            }
 
-              if((i + 1) % width === 0){
-                  row_counter++
-              }
-          }
+            if((i + 1) % width === 0){
+                row_counter++
+            }
+        }
 
-          update_result();
-      },
-    });
+        update_result();
+    };
+    image.src = core_storage_data.uri;
 }
